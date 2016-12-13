@@ -1,5 +1,5 @@
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -10,7 +10,8 @@ public class Minesweepo
     static private int[][] mineLevel;
     static private int[][] blockLevel;
     static Random RNG = new Random();
-    
+    BufferedImage boardView = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+    Graphics2D g = (Graphics2D)boardView.getGraphics();
     /*
     mine level:
     
@@ -23,6 +24,8 @@ public class Minesweepo
     0 = blocked
     1 = unblocked
     2 = flag
+    3 =  correctly guessed mine; only used at end of game
+    4 =  incorrectly guessed mine; only used at end of game
     */
     
     public static void clickTile(int x, int y)
@@ -31,11 +34,26 @@ public class Minesweepo
         {
             case 0:
             {
+                boolean[][] toReveal = new boolean[width][height];
+                
             }//fill reveal
             break;
             case 9:
             {
-            }//reveal all and end game
+                for(int curX = 0; curX < width; curX++)
+                {
+                    for(int curY = 0; curY < height; curY++)
+                    {
+                        if(blockLevel[curX][curY] == 0)
+                            blockLevel[curX][curY] = mineLevel[curX][curY] == 9?1:0;
+                        else if(blockLevel[curX][curY] == 2)
+                            if(mineLevel[curX][curY] == 9)
+                                blockLevel[curX][curY] = 3;
+                            else
+                                blockLevel[curX][curY] = 4;
+                    }
+                }
+            }
             break;
             default:
             {
@@ -52,6 +70,7 @@ public class Minesweepo
             width = w;
             height = h;
             mineLevel = new int[w][h];
+            blockLevel = new int[w][h];
             for(int m = 0; m < minesMax;)
             {
                 int tempX = RNG.nextInt(w);
@@ -97,8 +116,38 @@ public class Minesweepo
     }
     public BufferedImage getBoard()
     {
-        BufferedImage boardView = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics g = new boardView.getGraphics();
+        boardView = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        g = (Graphics2D)boardView.getGraphics();
+        //draw things
+        for(int curX = 0; curX < width; curX++)
+        {
+            for(int curY = 0; curY < height; curY++)
+            {
+                if(blockLevel[curX][curY] != 0)
+                {
+                    switch(mineLevel[curX][curY])
+                    {
+                        case 9:
+                        {
+                            //draw mine
+                        }
+                        break;
+                        case 0:
+                        {}
+                        break;
+                        default:
+                        {
+                            //draw the number
+                        }
+                        break;
+                    }
+                }
+                switch(blockLevel[curX][curY])
+                {
+                    //draw each specific thing
+                }
+            }
+        }
         return boardView;
     }
 }
