@@ -26,6 +26,12 @@ public class Minesweepo
     2 = flag
     3 =  correctly guessed mine; only used at end of game
     4 =  incorrectly guessed mine; only used at end of game
+    
+    revealing tiles:
+    
+    0 = do not reveal
+    1 = affirmed reveal
+    2 = edge of scan
     */
     
     public static void clickTile(int x, int y)
@@ -34,7 +40,7 @@ public class Minesweepo
         {
             case 0:
             {
-                boolean[][] toReveal = new boolean[width][height];
+                int[][] toReveal = new int[width][height];
                 
             }//fill reveal
             break;
@@ -114,7 +120,7 @@ public class Minesweepo
         else
             return false;
     }
-    public BufferedImage getBoard()
+    public BufferedImage getBoard()//this should probably be replaced with something in the main class
     {
         boardView = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         g = (Graphics2D)boardView.getGraphics();
