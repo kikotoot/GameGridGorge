@@ -1,4 +1,5 @@
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -9,6 +10,20 @@ public class Minesweepo
     static private int[][] mineLevel;
     static private int[][] blockLevel;
     static Random RNG = new Random();
+    
+    /*
+    mine level:
+    
+    0 = empty
+    1-8 = how many adjacent mines
+    9 = mine
+    
+    block level:
+    
+    0 = blocked
+    1 = unblocked
+    2 = flag
+    */
     
     public static void clickTile(int x, int y)
     {
@@ -24,7 +39,7 @@ public class Minesweepo
             break;
             default:
             {
-                blockLevel[x][y] = 0;
+                blockLevel[x][y] = 1;
             }
             break;
         }
@@ -43,10 +58,17 @@ public class Minesweepo
                 int tempY = RNG.nextInt(h);
                 if(mineLevel[tempX][tempY] != 9)
                 {
+                    mineLevel[tempX][tempY] = 9;
                     m++;
                 }
             }
-            //go over the board and add the numbers
+            for(int curX = 0; curX < width; curX++)
+            {
+                for(int curY = 0; curY < height; curY++)
+                {
+                    mineLevel[curX][curY] = getAdjacentMines(curX, curY);
+                }
+            }
         }
         else
         {
@@ -75,6 +97,8 @@ public class Minesweepo
     }
     public BufferedImage getBoard()
     {
-        BufferedImage board = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage boardView = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics g = new boardView.getGraphics();
+        return boardView;
     }
 }
