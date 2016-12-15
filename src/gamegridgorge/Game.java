@@ -1,6 +1,8 @@
 
 package gamegridgorge;
 
+import java.awt.event.MouseEvent;
+
 
 /**
  *
@@ -8,9 +10,10 @@ package gamegridgorge;
  */
 public abstract class Game
 {
-    protected static int[][] topLevel;
-    protected static int[][] bottomLevel;
-    protected static char[] topTranslation;
-    protected static char[] bottomTranslation;
-    public abstract void clickTile(int x, int y);
+    int width = 1, height = 1;
+    protected int[][] topLevel;
+    protected int[][] bottomLevel;
+    protected char[] topTranslation;
+    protected char[] bottomTranslation;
+    public abstract void clickTile(int x, int y, MouseEvent e);
 }

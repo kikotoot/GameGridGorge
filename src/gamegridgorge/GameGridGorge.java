@@ -14,12 +14,12 @@ import javax.swing.JFrame;
 public class GameGridGorge 
 {
     public static boolean killswitch = false;
-    
+    public static JFrame window;
     public static void main(String[] args) throws IOException, InterruptedException
     {
         
         int windowWidth, windowHeight;
-        JFrame window = new JFrame();
+        window = new JFrame();
         window.setTitle("No Game Selected");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
