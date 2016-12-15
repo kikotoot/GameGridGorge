@@ -1,5 +1,5 @@
 
-package githubgames;
+package gamegridgorge;
 
 import java.awt.Rectangle;
 

@@ -1,14 +1,18 @@
 
+package gamegridgorge;
+
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-
-public class Minesweepo 
+/**
+ *
+ * @author L
+ */
+public class Minesweepo extends Game
 {
     static int width = 1, height = 1;
-    static private int[][] mineLevel;
-    static private int[][] blockLevel;
     static Random RNG = new Random();
     BufferedImage boardView = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
     Graphics2D g = (Graphics2D)boardView.getGraphics();
@@ -34,9 +38,16 @@ public class Minesweepo
     2 = edge of scan
     */
     
-    public static void clickTile(int x, int y)
+    Minesweepo()
     {
-        switch(mineLevel[x][y])
+        bottomTranslation = new char[] {' ', '1', '2', '3', '4', '5', '6', '7', '8', '*'};
+        
+    }
+    
+    @Override
+    public void clickTile(int x, int y)
+    {
+        switch(bottomLevel[x][y])
         {
             case 0:
             {
@@ -50,20 +61,20 @@ public class Minesweepo
                 {
                     for(int curY = 0; curY < height; curY++)
                     {
-                        if(blockLevel[curX][curY] == 0)
-                            blockLevel[curX][curY] = mineLevel[curX][curY] == 9?1:0;
-                        else if(blockLevel[curX][curY] == 2)
-                            if(mineLevel[curX][curY] == 9)
-                                blockLevel[curX][curY] = 3;
+                        if(topLevel[curX][curY] == 0)
+                            topLevel[curX][curY] = bottomLevel[curX][curY] == 9?1:0;
+                        else if(topLevel[curX][curY] == 2)
+                            if(bottomLevel[curX][curY] == 9)
+                                topLevel[curX][curY] = 3;
                             else
-                                blockLevel[curX][curY] = 4;
+                                topLevel[curX][curY] = 4;
                     }
                 }
             }
             break;
             default:
             {
-                blockLevel[x][y] = 1;
+                topLevel[x][y] = 1;
             }
             break;
         }
@@ -75,15 +86,15 @@ public class Minesweepo
         {
             width = w;
             height = h;
-            mineLevel = new int[w][h];
-            blockLevel = new int[w][h];
+            bottomLevel = new int[w][h];
+            topLevel = new int[w][h];
             for(int m = 0; m < minesMax;)
             {
                 int tempX = RNG.nextInt(w);
                 int tempY = RNG.nextInt(h);
-                if(mineLevel[tempX][tempY] != 9)
+                if(bottomLevel[tempX][tempY] != 9)
                 {
-                    mineLevel[tempX][tempY] = 9;
+                    bottomLevel[tempX][tempY] = 9;
                     m++;
                 }
             }
@@ -91,7 +102,7 @@ public class Minesweepo
             {
                 for(int curY = 0; curY < height; curY++)
                 {
-                    mineLevel[curX][curY] = getAdjacentMines(curX, curY);
+                    bottomLevel[curX][curY] = getAdjacentMines(curX, curY);
                 }
             }
         }
@@ -116,7 +127,7 @@ public class Minesweepo
     private boolean safeMineCheck(int x, int y)
     {
         if(x > 0 && x < width && y > 0 && y < height)
-            return mineLevel[x][y] == 9;
+            return bottomLevel[x][y] == 9;
         else
             return false;
     }
@@ -129,9 +140,9 @@ public class Minesweepo
         {
             for(int curY = 0; curY < height; curY++)
             {
-                if(blockLevel[curX][curY] != 0)
+                if(topLevel[curX][curY] != 0)
                 {
-                    switch(mineLevel[curX][curY])
+                    switch(bottomLevel[curX][curY])
                     {
                         case 9:
                         {
@@ -148,7 +159,7 @@ public class Minesweepo
                         break;
                     }
                 }
-                switch(blockLevel[curX][curY])
+                switch(topLevel[curX][curY])
                 {
                     //draw each specific thing
                 }
