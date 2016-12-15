@@ -15,7 +15,28 @@ import javax.swing.JPanel;
  */
 public class SeePanel extends JPanel implements KeyListener, MouseMotionListener, MouseListener
 {
+    int framerate = 16;
+    int frameWidth = 1, frameHeight = 1;
+    int frameWidthMin = 0, frameHeightMin = 0;
+    
+    Colours c = new Colours();
+    Game game;
     SeePanel()
+    {
+        
+    }
+    
+    public void startup()
+    {
+        //get which game the person wants to play
+        //set this as game
+        if(true)
+        {
+            game = new Minesweepo();
+        }
+    }
+    
+    public void run()
     {
         
     }
@@ -23,7 +44,9 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     @Override
     public void paintComponent(Graphics g)
     {
-        //draw background
+        g.setColor(c.BLACK);
+        g.fillRect(0, 0, frameWidth, frameHeight);
+        
         //draw a lower layer of characters depending on the game's lower translation array
         //draw an upper layer of inversely coloured characters the same way
         //draw UI

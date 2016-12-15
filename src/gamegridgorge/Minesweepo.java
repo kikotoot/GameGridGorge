@@ -41,7 +41,7 @@ public class Minesweepo extends Game
     Minesweepo()
     {
         bottomTranslation = new char[] {' ', '1', '2', '3', '4', '5', '6', '7', '8', '*'};
-        
+        topTranslation = new char[] {'█', ' ', '◙'};
     }
     
     @Override

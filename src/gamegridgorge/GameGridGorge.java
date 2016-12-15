@@ -25,7 +25,6 @@ public class GameGridGorge
         
         
         SeePanel panel1 = new SeePanel();
-        /*
         panel1.frameHeightMin = window.getHeight();
         panel1.frameWidthMin = window.getWidth();
         Thread.sleep(2);
@@ -69,6 +68,5 @@ public class GameGridGorge
             Thread.sleep(panel1.framerate / 2);
             
         }
-        */
     }
 }
