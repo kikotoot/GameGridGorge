@@ -1,6 +1,7 @@
 
 package gamegridgorge;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -19,9 +20,9 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     int framerate = 16, gameFontSize;
     int frameWidth = 1, frameHeight = 1;
     int frameWidthMin = 0, frameHeightMin = 0;
+    int xTrans, yTrans;
     boolean inGame = false;
     
-    double resolution;
     
     Colours c = new Colours();
     Game game;
@@ -34,6 +35,9 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     {
         //get which game the person wants to play
         //set this as game
+        gameFontSize = 40;
+        xTrans = 70;
+        yTrans = 70;
         if(true)
         {
             game = new Minesweepo();
@@ -62,11 +66,15 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
         if(inGame)
         {
             g.setFont(new Font("Consolas", Font.PLAIN, gameFontSize));
+            Color hue = c.HueShift();
             for(int xOn = 0; xOn < game.width; xOn++)
             {
                 for(int yOn = 0; yOn < game.height; yOn++)
                 {
-                    g.drawString("" + game.bottomTranslation[game.bottomLevel[xOn][yOn]], xOn * gameFontSize, yOn * gameFontSize);
+                    g.setColor(hue);
+                    g.drawString("" + game.bottomTranslation[game.bottomLevel[xOn][yOn]], xOn * gameFontSize + xTrans, yOn * gameFontSize + yTrans);
+                    g.setColor(c.WHITE);
+                    g.drawString("" + game.topTranslation[game.topLevel[xOn][yOn]], xOn * gameFontSize + xTrans, yOn * gameFontSize + yTrans);
                 }
             }
         }
@@ -108,7 +116,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     @Override
     public void mouseClicked(MouseEvent e) 
     {
-        game.clickTile((int)(e.getX() / resolution), (int)(e.getY() / resolution), e);
+        game.clickTile((int)((e.getX() - xTrans) / gameFontSize), (int)((e.getY() - yTrans) / gameFontSize), e);
     }
 
     @Override

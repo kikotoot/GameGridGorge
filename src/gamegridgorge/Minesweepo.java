@@ -40,8 +40,8 @@ public class Minesweepo extends Game
     
     Minesweepo()
     {
-        bottomTranslation = new char[] {' ', '1', '2', '3', '4', '5', '6', '7', '8', '*'};
-        topTranslation = new char[] {'█', ' ', '◙'};
+        bottomTranslation = new char[] {' ', '1', '2', '3', '4', '5', '6', '7', '8', '☼'};
+        topTranslation = new char[] {'█', ' ', '◙', 'O', 'X'};
     }
     
     @Override
@@ -62,16 +62,33 @@ public class Minesweepo extends Game
                         {
                             if(toReveal[x][y] == 1)
                             {
-                                toReveal[x - 1][y - 1] = safeEmptyCheck(x - 1, y - 1)?2:1;
-                                toReveal[x][y - 1] = safeEmptyCheck(x, y - 1)?2:1;
-                                toReveal[x + 1][y - 1] = safeEmptyCheck(x + 1, y - 1)?2:1;
-                                toReveal[x - 1][y] = safeEmptyCheck(x - 1, y)?2:1;
-                                toReveal[x + 1][y] = safeEmptyCheck(x + 1, y)?2:1;
-                                toReveal[x - 1][y + 1] = safeEmptyCheck(x - 1, y + 1)?2:1;
-                                toReveal[x][y + 1] = safeEmptyCheck(x, y + 1)?2:1;
-                                toReveal[x + 1][y + 1] = safeEmptyCheck(x + 1, y + 1)?2:1;
+                                if(safeEdgeCheck(x - 1, y - 1))
+                                    toReveal[x - 1][y - 1] = safeEmptyCheck(x - 1, y - 1)?2:1;
+                                if(safeEdgeCheck(x, y - 1))
+                                    toReveal[x][y - 1] = safeEmptyCheck(x, y - 1)?2:1;
+                                if(safeEdgeCheck(x + 1, y - 1))
+                                    toReveal[x + 1][y - 1] = safeEmptyCheck(x + 1, y - 1)?2:1;
+                                if(safeEdgeCheck(x - 1, y))
+                                    toReveal[x - 1][y] = safeEmptyCheck(x - 1, y)?2:1;
+                                if(safeEdgeCheck(x + 1, y))
+                                    toReveal[x + 1][y] = safeEmptyCheck(x + 1, y)?2:1;
+                                if(safeEdgeCheck(x - 1, y + 1))
+                                    toReveal[x - 1][y + 1] = safeEmptyCheck(x - 1, y + 1)?2:1;
+                                if(safeEdgeCheck(x, y + 1))
+                                    toReveal[x][y + 1] = safeEmptyCheck(x, y + 1)?2:1;
+                                if(safeEdgeCheck(x + 1, y + 1))
+                                    toReveal[x + 1][y + 1] = safeEmptyCheck(x + 1, y + 1)?2:1;
                             }
                         }
+                    }
+                }
+                //reveal found tiles
+                for(int xOn = 0; xOn < width; xOn++)
+                {
+                    for(int yOn = 0; yOn < height; yOn++)
+                    {
+                        if(toReveal[xOn][yOn] != 0)
+                            topLevel[xOn][yOn] = 1;
                     }
                 }
             }
@@ -123,7 +140,8 @@ public class Minesweepo extends Game
             {
                 for(int curY = 0; curY < height; curY++)
                 {
-                    bottomLevel[curX][curY] = getAdjacentMines(curX, curY);
+                    if(bottomLevel[curX][curY] != 9)
+                        bottomLevel[curX][curY] = getAdjacentMines(curX, curY);
                 }
             }
         }
@@ -162,41 +180,5 @@ public class Minesweepo extends Game
     private boolean safeEdgeCheck(int x, int y)
     {
         return x > 0 && x < width && y > 0 && y < height;
-    }
-    public BufferedImage getBoard()//this should probably be replaced with something in the main class
-    {
-        boardView = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        g = (Graphics2D)boardView.getGraphics();
-        //draw things
-        for(int curX = 0; curX < width; curX++)
-        {
-            for(int curY = 0; curY < height; curY++)
-            {
-                if(topLevel[curX][curY] != 0)
-                {
-                    switch(bottomLevel[curX][curY])
-                    {
-                        case 9:
-                        {
-                            //draw mine
-                        }
-                        break;
-                        case 0:
-                        {}
-                        break;
-                        default:
-                        {
-                            //draw the number
-                        }
-                        break;
-                    }
-                }
-                switch(topLevel[curX][curY])
-                {
-                    //draw each specific thing
-                }
-            }
-        }
-        return boardView;
     }
 }
