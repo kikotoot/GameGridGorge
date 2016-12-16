@@ -52,7 +52,7 @@ public class Minesweepo extends Game
             case 0:
             {
                 int[][] toReveal = new int[width][height];
-                toReveal[x][y] = 1;
+                toReveal[x][y] = safeEmptyCheck(x, y)?2:1;
                 int distanceToEdge = 30;//TEMP
                 for(int i = 0; i < distanceToEdge; i++)
                 {
@@ -60,24 +60,24 @@ public class Minesweepo extends Game
                     {
                         for(int yOn = 0; yOn < height; yOn++)
                         {
-                            if(toReveal[x][y] == 1)
+                            if(toReveal[xOn][yOn] == 1)
                             {
-                                if(safeEdgeCheck(x - 1, y - 1))
-                                    toReveal[x - 1][y - 1] = safeEmptyCheck(x - 1, y - 1)?2:1;
-                                if(safeEdgeCheck(x, y - 1))
-                                    toReveal[x][y - 1] = safeEmptyCheck(x, y - 1)?2:1;
-                                if(safeEdgeCheck(x + 1, y - 1))
-                                    toReveal[x + 1][y - 1] = safeEmptyCheck(x + 1, y - 1)?2:1;
-                                if(safeEdgeCheck(x - 1, y))
-                                    toReveal[x - 1][y] = safeEmptyCheck(x - 1, y)?2:1;
-                                if(safeEdgeCheck(x + 1, y))
-                                    toReveal[x + 1][y] = safeEmptyCheck(x + 1, y)?2:1;
-                                if(safeEdgeCheck(x - 1, y + 1))
-                                    toReveal[x - 1][y + 1] = safeEmptyCheck(x - 1, y + 1)?2:1;
-                                if(safeEdgeCheck(x, y + 1))
-                                    toReveal[x][y + 1] = safeEmptyCheck(x, y + 1)?2:1;
-                                if(safeEdgeCheck(x + 1, y + 1))
-                                    toReveal[x + 1][y + 1] = safeEmptyCheck(x + 1, y + 1)?2:1;
+                                if(safeEdgeCheck(xOn - 1, yOn - 1))
+                                    toReveal[xOn - 1][yOn - 1] = safeEmptyCheck(xOn - 1, yOn - 1)?2:1;
+                                if(safeEdgeCheck(xOn, yOn - 1))
+                                    toReveal[xOn][yOn - 1] = safeEmptyCheck(xOn, yOn - 1)?2:1;
+                                if(safeEdgeCheck(xOn + 1, yOn - 1))
+                                    toReveal[xOn + 1][yOn - 1] = safeEmptyCheck(xOn + 1, yOn - 1)?2:1;
+                                if(safeEdgeCheck(xOn - 1, yOn))
+                                    toReveal[xOn - 1][yOn] = safeEmptyCheck(xOn - 1, yOn)?2:1;
+                                if(safeEdgeCheck(xOn + 1, yOn))
+                                    toReveal[xOn + 1][yOn] = safeEmptyCheck(xOn + 1, yOn)?2:1;
+                                if(safeEdgeCheck(xOn - 1, yOn + 1))
+                                    toReveal[xOn - 1][yOn + 1] = safeEmptyCheck(xOn - 1, yOn + 1)?2:1;
+                                if(safeEdgeCheck(xOn, yOn + 1))
+                                    toReveal[xOn][yOn + 1] = safeEmptyCheck(xOn, yOn + 1)?2:1;
+                                if(safeEdgeCheck(xOn + 1, yOn + 1))
+                                    toReveal[xOn + 1][yOn + 1] = safeEmptyCheck(xOn + 1, yOn + 1)?2:1;
                             }
                         }
                     }
@@ -157,7 +157,7 @@ public class Minesweepo extends Game
         minesFound += safeMineCheck(x - 1, y)?1:0;
         minesFound += safeMineCheck(x - 1, y + 1)?1:0;
         minesFound += safeMineCheck(x, y - 1)?1:0;
-        minesFound += safeMineCheck(x, y - 1)?1:0;
+        minesFound += safeMineCheck(x, y + 1)?1:0;
         minesFound += safeMineCheck(x + 1, y - 1)?1:0;
         minesFound += safeMineCheck(x + 1, y)?1:0;
         minesFound += safeMineCheck(x + 1, y + 1)?1:0;
