@@ -21,6 +21,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     int frameWidth = 1, frameHeight = 1;
     int frameWidthMin = 0, frameHeightMin = 0;
     int xTrans, yTrans;
+    int mouseX = 0, mouseY = 0;
     boolean inGame = false;
     
     
@@ -77,6 +78,11 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                     g.drawString("" + game.topTranslation[game.topLevel[xOn][yOn]], xOn * gameFontSize + xTrans, yOn * gameFontSize + yTrans);
                 }
             }
+            g.setColor(hue);
+            int mX = (int)((mouseX - xTrans) / gameFontSize) * gameFontSize + xTrans;
+            int mY = (int)((mouseY - yTrans) / gameFontSize) * gameFontSize + yTrans;
+            g.drawLine(mX + 20, mY, mX - 20, mY);
+            g.drawLine(mX, mY + 20, mX, mY - 20);
         }
         //draw a lower layer of characters depending on the game's lower translation array
         //draw an upper layer of inversely coloured characters the same way
@@ -104,19 +110,21 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     @Override
     public void mouseDragged(MouseEvent e) 
     {
-        
+        mouseX = e.getX();
+        mouseY = e.getY();
     }
 
     @Override
     public void mouseMoved(MouseEvent e) 
     {
-        
+        mouseX = e.getX();
+        mouseY = e.getY();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) 
     {
-        game.clickTile((int)((e.getX() - xTrans) / gameFontSize), (int)((e.getY() - yTrans) / gameFontSize), e);
+        game.clickTile((int)((mouseX - xTrans) / gameFontSize), (int)((mouseY - yTrans) / gameFontSize), e);
     }
 
     @Override
