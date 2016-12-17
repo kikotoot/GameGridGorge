@@ -10,10 +10,11 @@ import java.awt.event.MouseEvent;
  */
 public abstract class Game
 {
-    int width = 1, height = 1;
+    protected int width = 1, height = 1;
     protected int[][] topLevel;
     protected int[][] bottomLevel;
     protected char[] topTranslation;
     protected char[] bottomTranslation;
+    protected boolean inGame = false;
     public abstract void clickTile(int x, int y, MouseEvent e);
 }

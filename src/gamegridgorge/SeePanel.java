@@ -22,7 +22,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     int frameWidthMin = 0, frameHeightMin = 0;
     int xTrans, yTrans;
     int mouseX = 0, mouseY = 0;
-    boolean inGame = false;
+    boolean gameLoaded = false;
     
     
     Colours c = new Colours();
@@ -44,7 +44,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
             game = new Minesweepo();
             GameGridGorge.window.setTitle("Minecraft");
             ((Minesweepo)game).newBoard(10, 10, 10);
-            inGame = true;
+            gameLoaded = true;
         }
         if(false)
         {
@@ -64,7 +64,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     {
         g.setColor(c.BLACK);
         g.fillRect(0, 0, frameWidth, frameHeight);
-        if(inGame)
+        if(gameLoaded)
         {
             g.setFont(new Font("Consolas", Font.PLAIN, gameFontSize));
             Color hue = c.HueShift();
@@ -74,8 +74,12 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 {
                     g.setColor(c.WHITE);
                     g.drawString("" + game.bottomTranslation[game.bottomLevel[xOn][yOn]], xOn * gameFontSize + xTrans, yOn * gameFontSize + yTrans);
-                    g.setColor(hue);
-                    g.drawString("" + game.topTranslation[game.topLevel[xOn][yOn]], xOn * gameFontSize + xTrans, yOn * gameFontSize + yTrans);
+                    if(game.topTranslation[game.topLevel[xOn][yOn]] != ' ')
+                    {
+                        g.fillRect(xOn * gameFontSize + xTrans, (yOn - 1) * gameFontSize + yTrans, gameFontSize, gameFontSize);
+                        g.setColor(hue);
+                        g.drawString("" + game.topTranslation[game.topLevel[xOn][yOn]], xOn * gameFontSize + xTrans, yOn * gameFontSize + yTrans);
+                    }
                 }
             }
             g.setColor(hue);
