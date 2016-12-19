@@ -15,6 +15,8 @@ public abstract class Game
     protected int[][] bottomLevel;
     protected char[] topTranslation;
     protected char[] bottomTranslation;
-    protected boolean inGame = false;
+    protected boolean inGame = false, exit = false;
     public abstract void clickTile(int x, int y, MouseEvent e);
+    public abstract void win();
+    public abstract void lose();
 }

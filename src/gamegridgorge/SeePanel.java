@@ -39,24 +39,33 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
         gameFontSize = 40;
         xTrans = 70;
         yTrans = 70;
-        if(true)
-        {
-            game = new Minesweepo();
-            GameGridGorge.window.setTitle("Minecraft");
-            ((Minesweepo)game).newBoard(10, 10, 10);
-            gameLoaded = true;
-        }
-        if(false)
-        {
-            //temp
-            game = new TicTacToe();
-            GameGridGorge.window.setTitle("TicTacToe");
-        }
     }
     
     public void run()
     {
-        
+        if(!gameLoaded)
+        {
+            if(true)
+            {
+                game = new Minesweepo();
+                GameGridGorge.window.setTitle("Minecraft");
+                ((Minesweepo)game).newBoard(10, 10, 10);
+                gameLoaded = true;
+            }
+            if(false)
+            {
+                //temp
+                game = new TicTacToe();
+                GameGridGorge.window.setTitle("TicTacToe");
+            }
+        }
+        else
+        {
+            if(game.exit)
+            {
+                gameLoaded = false;
+            }
+        }
     }
     
     @Override
@@ -83,6 +92,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 }
             }
             g.setColor(hue);
+            g.drawRect(xTrans, yTrans, game.width * gameFontSize, game.height * gameFontSize);
             int mX = (int)((mouseX - xTrans) / gameFontSize) * gameFontSize + xTrans;
             int mY = (int)((mouseY - yTrans) / gameFontSize) * gameFontSize + yTrans;
             g.drawLine(mX + 20, mY, mX - 20, mY);
