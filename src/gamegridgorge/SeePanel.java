@@ -100,8 +100,6 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
 //            g.drawLine(mX + 20, mY, mX - 20, mY);
 //            g.drawLine(mX, mY + 20, mX, mY - 20);
         }
-        //draw a lower layer of characters depending on the game's lower translation array
-        //draw an upper layer of inversely coloured characters the same way
         //draw UI
     }
     

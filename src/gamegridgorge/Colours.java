@@ -38,35 +38,36 @@ public class Colours
         }
         return c;
     }
+    private int hue2 = 0;
     public Color HueShift2()
     {
         //red
         if(hue < 255)
-            r = hue;
+            r = hue2;
         else
-            r = 510 - hue;
+            r = 510 - hue2;
         //green
         if(hue < 85)
-            g = hue + 170;
-        else if(hue < 340)
-            g = 340 - hue;
+            g = hue2 + 170;
+        else if(hue2 < 340)
+            g = 340 - hue2;
         else
-            g = hue - 340;
+            g = hue2 - 340;
         //blue
         if(hue < 170)
-            b = 170 - hue;
+            b = 170 - hue2;
         else if(hue < 425)
-            b = hue - 170;
+            b = hue2 - 170;
         else
-            b = 680 - hue;
+            b = 680 - hue2;
         Color c = new Color(r, g, b);
-        if(hue >= 510)
+        if(hue2 >= 510)
         {
-            hue = 0;
+            hue2 = 0;
         }
         else
         {
-            hue++;
+            hue2++;
         }
         return c;
     }
