@@ -2,9 +2,7 @@
 package gamegridgorge;
 
 
-import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
@@ -14,8 +12,6 @@ import java.util.Random;
 public class Minesweepo extends Game
 {
     static Random RNG = new Random();
-    BufferedImage boardView = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
-    Graphics2D g = (Graphics2D)boardView.getGraphics();
     /*
     mine level:
     
@@ -47,7 +43,6 @@ public class Minesweepo extends Game
     @Override
     public void clickTile(int x, int y, MouseEvent e)
     {
-        System.out.println(e.getButton());
         if(safeEdgeCheck(x, y))
         {
             if(e.getButton() == 1)

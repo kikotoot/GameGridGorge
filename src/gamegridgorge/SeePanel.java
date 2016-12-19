@@ -73,12 +73,12 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 for(int yOn = 0; yOn < game.height; yOn++)
                 {
                     g.setColor(c.WHITE);
-                    g.drawString("" + game.bottomTranslation[game.bottomLevel[xOn][yOn]], xOn * gameFontSize + xTrans, yOn * gameFontSize + yTrans);
+                    g.drawString("" + game.bottomTranslation[game.bottomLevel[xOn][yOn]], xOn * gameFontSize + xTrans + gameFontSize / 4, (yOn + 1) * gameFontSize + yTrans - gameFontSize / 4);
                     if(game.topTranslation[game.topLevel[xOn][yOn]] != ' ')
                     {
-                        g.fillRect(xOn * gameFontSize + xTrans, (yOn - 1) * gameFontSize + yTrans, gameFontSize, gameFontSize);
+                        g.fillRect(xOn * gameFontSize + xTrans, yOn * gameFontSize + yTrans, gameFontSize, gameFontSize);
                         g.setColor(hue);
-                        g.drawString("" + game.topTranslation[game.topLevel[xOn][yOn]], xOn * gameFontSize + xTrans, yOn * gameFontSize + yTrans);
+                        g.drawString("" + game.topTranslation[game.topLevel[xOn][yOn]], xOn * gameFontSize + xTrans + gameFontSize / 4, (yOn + 1) * gameFontSize + yTrans - gameFontSize / 4);
                     }
                 }
             }
