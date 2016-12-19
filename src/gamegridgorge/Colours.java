@@ -18,14 +18,14 @@ public class Colours
     }
     
     
-    private int hue = 0;
+    private double hue = 0;
     private int r, g, b;
-    double hueSpeed = 90;
+    double hueSpeed = 1;
     public Color HueShift()
     {
-        r = (int)(Math.sin(hue / hueSpeed) * 127) + 127;
-        g = (int)(Math.sin((hue + 170) / hueSpeed) * 127) + 127;
-        b = (int)(Math.sin((hue + 340) / hueSpeed) * 127) + 127;
+        r = (int)(Math.sin(hue / 90.0) * 127) + 127;
+        g = (int)(Math.sin((hue + 170) / 90.0) * 127) + 127;
+        b = (int)(Math.sin((hue + 340) / 90.0) * 127) + 127;
         
         Color c = new Color(r, g, b);
         if(hue >= 510)
@@ -34,7 +34,7 @@ public class Colours
         }
         else
         {
-            hue++;
+            hue += hueSpeed;
         }
         return c;
     }

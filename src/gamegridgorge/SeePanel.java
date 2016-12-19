@@ -36,7 +36,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     {
         //get which game the person wants to play
         //set this as game
-        gameFontSize = 40;
+        gameFontSize = 20;
         xTrans = 70;
         yTrans = 70;
     }
@@ -49,7 +49,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
             {
                 game = new Minesweepo();
                 GameGridGorge.window.setTitle("Minecraft");
-                ((Minesweepo)game).newBoard(10, 10, 10);
+                ((Minesweepo)game).newBoard(30, 20, 40);
                 gameLoaded = true;
             }
             if(false)
@@ -93,10 +93,12 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
             }
             g.setColor(hue);
             g.drawRect(xTrans, yTrans, game.width * gameFontSize, game.height * gameFontSize);
-            int mX = (int)((mouseX - xTrans) / gameFontSize) * gameFontSize + xTrans;
-            int mY = (int)((mouseY - yTrans) / gameFontSize) * gameFontSize + yTrans;
-            g.drawLine(mX + 20, mY, mX - 20, mY);
-            g.drawLine(mX, mY + 20, mX, mY - 20);
+            
+//            draws a cross where the mouse is calculated to be
+//            int mX = (int)((mouseX - xTrans) / gameFontSize) * gameFontSize + xTrans;
+//            int mY = (int)((mouseY - yTrans) / gameFontSize) * gameFontSize + yTrans;
+//            g.drawLine(mX + 20, mY, mX - 20, mY);
+//            g.drawLine(mX, mY + 20, mX, mY - 20);
         }
         //draw a lower layer of characters depending on the game's lower translation array
         //draw an upper layer of inversely coloured characters the same way
