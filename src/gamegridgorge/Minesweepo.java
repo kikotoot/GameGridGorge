@@ -49,66 +49,69 @@ public class Minesweepo extends Game
             {
                 if(e.getButton() == 1)
                 {
-                    switch(bottomLevel[x][y])
+                    if(topLevel[x][y] == 0)
                     {
-                        case 0:
+                        switch(bottomLevel[x][y])
                         {
-                            int[][] toReveal = new int[width][height];
-                            toReveal[x][y] = safeEmptyCheck(x, y)?2:1;
-                            int distanceToEdge = 30;//TEMP
-                            for(int i = 0; i < distanceToEdge; i++)
+                            case 0:
                             {
+                                int[][] toReveal = new int[width][height];
+                                toReveal[x][y] = safeEmptyCheck(x, y)?2:1;
+                                int distanceToEdge = 30;//TEMP
+                                for(int i = 0; i < distanceToEdge; i++)
+                                {
+                                    for(int xOn = 0; xOn < width; xOn++)
+                                    {
+                                        for(int yOn = 0; yOn < height; yOn++)
+                                        {
+                                            if(toReveal[xOn][yOn] == 1)
+                                            {
+                                                if(safeRevealCheck(xOn - 1, yOn - 1))
+                                                    toReveal[xOn - 1][yOn - 1] = safeEmptyCheck(xOn - 1, yOn - 1)?2:1;
+                                                if(safeRevealCheck(xOn, yOn - 1))
+                                                    toReveal[xOn][yOn - 1] = safeEmptyCheck(xOn, yOn - 1)?2:1;
+                                                if(safeRevealCheck(xOn + 1, yOn - 1))
+                                                    toReveal[xOn + 1][yOn - 1] = safeEmptyCheck(xOn + 1, yOn - 1)?2:1;
+                                                if(safeRevealCheck(xOn - 1, yOn))
+                                                    toReveal[xOn - 1][yOn] = safeEmptyCheck(xOn - 1, yOn)?2:1;
+                                                if(safeRevealCheck(xOn + 1, yOn))
+                                                    toReveal[xOn + 1][yOn] = safeEmptyCheck(xOn + 1, yOn)?2:1;
+                                                if(safeRevealCheck(xOn - 1, yOn + 1))
+                                                    toReveal[xOn - 1][yOn + 1] = safeEmptyCheck(xOn - 1, yOn + 1)?2:1;
+                                                if(safeRevealCheck(xOn, yOn + 1))
+                                                    toReveal[xOn][yOn + 1] = safeEmptyCheck(xOn, yOn + 1)?2:1;
+                                                if(safeRevealCheck(xOn + 1, yOn + 1))
+                                                    toReveal[xOn + 1][yOn + 1] = safeEmptyCheck(xOn + 1, yOn + 1)?2:1;
+                                            }
+                                        }
+                                    }
+                                }
+                                //reveal found tiles
                                 for(int xOn = 0; xOn < width; xOn++)
                                 {
                                     for(int yOn = 0; yOn < height; yOn++)
                                     {
-                                        if(toReveal[xOn][yOn] == 1)
-                                        {
-                                            if(safeEdgeCheck(xOn - 1, yOn - 1))
-                                                toReveal[xOn - 1][yOn - 1] = safeEmptyCheck(xOn - 1, yOn - 1)?2:1;
-                                            if(safeEdgeCheck(xOn, yOn - 1))
-                                                toReveal[xOn][yOn - 1] = safeEmptyCheck(xOn, yOn - 1)?2:1;
-                                            if(safeEdgeCheck(xOn + 1, yOn - 1))
-                                                toReveal[xOn + 1][yOn - 1] = safeEmptyCheck(xOn + 1, yOn - 1)?2:1;
-                                            if(safeEdgeCheck(xOn - 1, yOn))
-                                                toReveal[xOn - 1][yOn] = safeEmptyCheck(xOn - 1, yOn)?2:1;
-                                            if(safeEdgeCheck(xOn + 1, yOn))
-                                                toReveal[xOn + 1][yOn] = safeEmptyCheck(xOn + 1, yOn)?2:1;
-                                            if(safeEdgeCheck(xOn - 1, yOn + 1))
-                                                toReveal[xOn - 1][yOn + 1] = safeEmptyCheck(xOn - 1, yOn + 1)?2:1;
-                                            if(safeEdgeCheck(xOn, yOn + 1))
-                                                toReveal[xOn][yOn + 1] = safeEmptyCheck(xOn, yOn + 1)?2:1;
-                                            if(safeEdgeCheck(xOn + 1, yOn + 1))
-                                                toReveal[xOn + 1][yOn + 1] = safeEmptyCheck(xOn + 1, yOn + 1)?2:1;
-                                        }
+                                        if(toReveal[xOn][yOn] != 0)
+                                            topLevel[xOn][yOn] = 1;
                                     }
                                 }
                             }
-                            //reveal found tiles
-                            for(int xOn = 0; xOn < width; xOn++)
+                            break;
+                            case 9:
                             {
-                                for(int yOn = 0; yOn < height; yOn++)
-                                {
-                                    if(toReveal[xOn][yOn] != 0)
-                                        topLevel[xOn][yOn] = 1;
-                                }
+                                lose();
                             }
+                            break;
+                            default:
+                            {
+                                topLevel[x][y] = 1;
+                            }
+                            break;
                         }
-                        break;
-                        case 9:
+                        if(checkWin())
                         {
-                            lose();
+                            win();
                         }
-                        break;
-                        default:
-                        {
-                            topLevel[x][y] = 1;
-                        }
-                        break;
-                    }
-                    if(checkWin())
-                    {
-                        win();
                     }
                 }
                 else if(e.getButton() == 3)
@@ -169,22 +172,21 @@ public class Minesweepo extends Game
     }
     private boolean checkWin()
     {
-        boolean result = true;
         for(int xOn = 0; xOn < width; xOn++)
         {
             for(int yOn = 0; yOn < height; yOn++)
             {
                 if(bottomLevel[xOn][yOn] == 9 && topLevel[xOn][yOn] == 1)
                 {
-                    result = false;
+                    return false;
                 }
                 if(bottomLevel[xOn][yOn] != 9 && topLevel[xOn][yOn] == 0)
                 {
-                    result = false;
+                    return false;
                 }
             }
         }
-        return result;
+        return true;
     }
     private int getAdjacentMines(int x, int y)
     {
@@ -212,6 +214,12 @@ public class Minesweepo extends Game
             return bottomLevel[x][y] != 0;
         else
             return false;
+    }
+    private boolean safeRevealCheck(int x, int y)
+    {
+        if(safeEdgeCheck(x, y))
+            return topLevel[x][y] != 2;
+        return false;
     }
     private boolean safeEdgeCheck(int x, int y)
     {

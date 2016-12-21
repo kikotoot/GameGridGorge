@@ -15,5 +15,17 @@ public class TicTacToe extends Game
     {
         
     }
+
+    @Override
+    public void win() 
+    {
+        
+    }
+
+    @Override
+    public void lose() 
+    {
+        
+    }
     
 }

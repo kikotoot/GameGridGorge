@@ -36,9 +36,6 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     {
         //get which game the person wants to play
         //set this as game
-        gameFontSize = 20;
-        xTrans = 70;
-        yTrans = 70;
     }
     
     public void run()
@@ -47,6 +44,9 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
         {
             if(true)
             {
+                gameFontSize = 20;
+                xTrans = 70;
+                yTrans = 70;
                 game = new Minesweepo();
                 GameGridGorge.window.setTitle("Minecraft");
                 ((Minesweepo)game).newBoard(30, 20, 40);
@@ -54,9 +54,13 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
             }
             if(false)
             {
+                gameFontSize = 80;
+                xTrans = 70;
+                yTrans = 70;
                 //temp
                 game = new TicTacToe();
                 GameGridGorge.window.setTitle("TicTacToe");
+                //any initialization
             }
         }
         else
@@ -64,6 +68,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
             if(game.exit)
             {
                 gameLoaded = false;
+                GameGridGorge.window.setTitle("No Game Selected");
             }
         }
     }
