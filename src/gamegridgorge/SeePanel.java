@@ -39,8 +39,9 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     public void startup()
     {
         //put code needed to be run once upon startup here
-        buttons.add(new Button(new Rectangle(20, 20, 40, 40), "mineswep", '☼'));
         gameFontSize = 30;
+        buttons.add(new Button(new Rectangle(20, 40, 120, gameFontSize + 10), "mineswep", '☼'));
+        buttons.add(new Button(new Rectangle(20, 90, 120, gameFontSize + 10), "tictac", 'x'));
         xTrans = 70;
         yTrans = 70;
         gameLoaded = false;
@@ -59,7 +60,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 yTrans = 70;
                 game = new Minesweepo();
                 GameGridGorge.window.setTitle("Minecraft");
-                ((Minesweepo)game).newBoard(30, 20, 40);
+                ((Minesweepo)game).newBoard(30, 20, 50);
                 gameLoaded = true;
             }
             if(command == 'x')
@@ -71,6 +72,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 game = new TicTacToe();
                 GameGridGorge.window.setTitle("TicTacToe");
                 //any initialization
+                gameLoaded = true;
             }
         }
         else
@@ -90,7 +92,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     @Override
     public void paintComponent(Graphics g)
     {
-        g.setColor(c.BLACK);
+        g.setColor(c.BACKGROUND);
         g.fillRect(0, 0, frameWidth, frameHeight);
         g.setFont(new Font("Consolas", Font.PLAIN, gameFontSize));
         Color hue = c.HueShift();
@@ -101,7 +103,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
             {
                 for(int yOn = 0; yOn < game.height; yOn++)
                 {
-                    g.setColor(c.WHITE);
+                    g.setColor(c.FILLER);
                     g.drawString("" + game.bottomTranslation[game.bottomLevel[xOn][yOn]], xOn * gameFontSize + xTrans + gameFontSize / 4, (yOn + 1) * gameFontSize + yTrans - gameFontSize / 4);
                     if(game.topTranslation[game.topLevel[xOn][yOn]] != ' ')
                     {
@@ -140,13 +142,14 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
             for(int bOn = 0; bOn < buttons.size(); bOn++)
             {
                 tempButton = buttons.get(bOn);
+                g.setColor(c.FILLER);
+                g.fillRect(tempButton.area.x, tempButton.area.y, tempButton.area.width, tempButton.area.height);
                 g.setColor(hue);
                 g.drawRect(tempButton.area.x, tempButton.area.y, tempButton.area.width, tempButton.area.height);
-                g.setColor(c.WHITE);
+                g.setColor(hue);
                 g.drawString(tempButton.text, tempButton.area.x + gameFontSize / 4, tempButton.area.y + gameFontSize);
             }
         }
-        //draw UI
     }
     
     @Override

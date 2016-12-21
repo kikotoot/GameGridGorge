@@ -9,8 +9,8 @@ import java.awt.Color;
  */
 public class Colours
 {
-    final Color BLACK = new Color(0, 0, 0);
-    final Color WHITE = new Color(255, 255, 255);
+    final Color BACKGROUND = new Color(0, 0, 0);
+    final Color FILLER = new Color(255, 255, 255);
     public Color Shadow(int alpha)
     {
         Color c = new Color(0, 0, 0, alpha);
