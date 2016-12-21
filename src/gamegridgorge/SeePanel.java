@@ -4,11 +4,13 @@ package gamegridgorge;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
@@ -24,6 +26,8 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     int mouseX = 0, mouseY = 0;
     boolean gameLoaded = false;
     
+    ArrayList<Button> buttons = new ArrayList();
+    char command = ' ';
     
     Colours c = new Colours();
     Game game;
@@ -35,6 +39,12 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     public void startup()
     {
         //put code needed to be run once upon startup here
+        buttons.add(new Button(new Rectangle(20, 20, 40, 40), "mineswep", '☼'));
+        gameFontSize = 30;
+        xTrans = 70;
+        yTrans = 70;
+        gameLoaded = false;
+        GameGridGorge.window.setTitle("No Game Selected");
     }
     
     public void run()
@@ -42,7 +52,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
         if(!gameLoaded)
         {
             //get a game to play
-            if(true)
+            if(command == '☼')
             {
                 gameFontSize = 20;
                 xTrans = 70;
@@ -52,7 +62,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 ((Minesweepo)game).newBoard(30, 20, 40);
                 gameLoaded = true;
             }
-            if(false)
+            if(command == 'x')
             {
                 gameFontSize = 80;
                 xTrans = 70;
@@ -67,6 +77,10 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
         {
             if(game.exit)
             {
+                command = ' ';
+                gameFontSize = 30;
+                xTrans = 70;
+                yTrans = 70;
                 gameLoaded = false;
                 GameGridGorge.window.setTitle("No Game Selected");
             }
@@ -78,10 +92,11 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     {
         g.setColor(c.BLACK);
         g.fillRect(0, 0, frameWidth, frameHeight);
+        g.setFont(new Font("Consolas", Font.PLAIN, gameFontSize));
+        Color hue = c.HueShift();
+            
         if(gameLoaded)
         {
-            g.setFont(new Font("Consolas", Font.PLAIN, gameFontSize));
-            Color hue = c.HueShift();
             for(int xOn = 0; xOn < game.width; xOn++)
             {
                 for(int yOn = 0; yOn < game.height; yOn++)
@@ -118,6 +133,18 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
 //            int mY = (int)((mouseY - yTrans) / gameFontSize) * gameFontSize + yTrans;
 //            g.drawLine(mX + 20, mY, mX - 20, mY);
 //            g.drawLine(mX, mY + 20, mX, mY - 20);
+        }
+        else
+        {
+            Button tempButton;
+            for(int bOn = 0; bOn < buttons.size(); bOn++)
+            {
+                tempButton = buttons.get(bOn);
+                g.setColor(hue);
+                g.drawRect(tempButton.area.x, tempButton.area.y, tempButton.area.width, tempButton.area.height);
+                g.setColor(c.WHITE);
+                g.drawString(tempButton.text, tempButton.area.x + gameFontSize / 4, tempButton.area.y + gameFontSize);
+            }
         }
         //draw UI
     }
@@ -157,7 +184,16 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     @Override
     public void mouseClicked(MouseEvent e) 
     {
-        game.clickTile((int)((mouseX - xTrans) / gameFontSize), (int)((mouseY - yTrans) / gameFontSize), e);
+        if(gameLoaded)
+            game.clickTile((int)((mouseX - xTrans) / gameFontSize), (int)((mouseY - yTrans) / gameFontSize), e);
+        else
+        {
+            for(int bOn = 0; bOn < buttons.size(); bOn++)
+            {
+                if(buttons.get(bOn).collides(e.getX(), e.getY()))
+                    command = buttons.get(bOn).command;
+            }
+        }
     }
 
     @Override
