@@ -16,7 +16,12 @@ public abstract class Game
     protected char[] topTranslation;
     protected char[] bottomTranslation;
     protected boolean inGame = false, exit = false;
+    protected boolean drawGrid;
     public abstract void clickTile(int x, int y, MouseEvent e);
     public abstract void win();
     public abstract void lose();
+    public boolean drawGrid()
+    {
+        return drawGrid;
+    }
 }

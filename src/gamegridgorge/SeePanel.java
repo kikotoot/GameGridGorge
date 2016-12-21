@@ -34,14 +34,14 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     
     public void startup()
     {
-        //get which game the person wants to play
-        //set this as game
+        //put code needed to be run once upon startup here
     }
     
     public void run()
     {
         if(!gameLoaded)
         {
+            //get a game to play
             if(true)
             {
                 gameFontSize = 20;
@@ -99,6 +99,20 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
             g.setColor(hue);
             g.drawRect(xTrans, yTrans, game.width * gameFontSize, game.height * gameFontSize);
             
+            if(game.drawGrid())
+            {
+                for(int xOn = 0; xOn < game.width; xOn++)
+                {
+                    g.setColor(hue);
+                    g.drawLine(xTrans + xOn * gameFontSize, yTrans, xTrans + xOn * gameFontSize, yTrans + game.height * gameFontSize);
+
+                }
+                for(int yOn = 0; yOn < game.height; yOn++)
+                {
+                    g.setColor(hue);
+                    g.drawLine(xTrans, yTrans + yOn * gameFontSize, xTrans + game.width * gameFontSize, yTrans + yOn * gameFontSize);
+                }
+            }
 //            draws a cross where the mouse is calculated to be
 //            int mX = (int)((mouseX - xTrans) / gameFontSize) * gameFontSize + xTrans;
 //            int mY = (int)((mouseY - yTrans) / gameFontSize) * gameFontSize + yTrans;

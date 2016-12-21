@@ -38,6 +38,7 @@ public class Minesweepo extends Game
     {
         bottomTranslation = new char[] {' ', '1', '2', '3', '4', '5', '6', '7', '8', '☼'};
         topTranslation = new char[] {'#', ' ', 'F', 'O', 'X'};
+        drawGrid = false;
     }
     
     @Override
