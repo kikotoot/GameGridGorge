@@ -40,41 +40,39 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     {
         //put code needed to be run once upon startup here
         gameFontSize = 30;
-        String label = "mines";
-        buttons.add(new Button(new Rectangle(20, 40, label.length() * gameFontSize / 2 + gameFontSize, gameFontSize + 10), label, '☼'));
-        label = "tictac";
-        buttons.add(new Button(new Rectangle(20, 90, label.length() * gameFontSize / 2 + gameFontSize, gameFontSize + 10), label, 'x'));
+        addButton(40, 40, "minesweepre", '☼');
+        addButton(40, 90, "tictac", 'x');
         xTrans = 70;
         yTrans = 70;
         gameLoaded = false;
         GameGridGorge.window.setTitle("No Game Selected");
     }
-    
+    private void addButton(int x, int y, String label, char cmd)
+    {
+        buttons.add(new Button(new Rectangle(x, y, label.length() * gameFontSize / 2 + gameFontSize, gameFontSize + 10), label, cmd));
+    }
     public void run()
     {
         if(!gameLoaded)
         {
             //get a game to play
-            if(command == '☼')
+            switch(command)
             {
-                gameFontSize = 20;
-                xTrans = 70;
-                yTrans = 70;
-                game = new Minesweeper();
-                GameGridGorge.window.setTitle(game.getName());
-                ((Minesweeper)game).newBoard(30, 20, 50);
-                gameLoaded = true;
-            }
-            if(command == 'x')
-            {
-                gameFontSize = 80;
-                xTrans = 70;
-                yTrans = 70;
-                //temp
-                game = new TicTacToe();
-                GameGridGorge.window.setTitle(game.getName());
-                //any initialization
-                gameLoaded = true;
+                case '☼':
+                {
+                    game = new Minesweeper();
+                    initGame(30, 70, 70);
+                    ((Minesweeper)game).newBoard(30, 20, 50);
+                    gameLoaded = true;
+                }
+                break;
+                case 'x':
+                {
+                    game = new TicTacToe();
+                    initGame(80, 70, 70);
+                    //any initialization
+                    gameLoaded = true;
+                }
             }
         }
         else
@@ -89,6 +87,13 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 GameGridGorge.window.setTitle("No Game Selected");
             }
         }
+    }
+    private void initGame(int fontSize, int xT, int yT)
+    {
+        gameFontSize = fontSize;
+        xTrans = xT;
+        yTrans = yT;
+        GameGridGorge.window.setTitle(game.getName());
     }
     
     @Override
