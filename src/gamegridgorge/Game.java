@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
  */
 public abstract class Game
 {
+    protected String name;
     protected int width = 1, height = 1;
     protected int[][] topLevel;
     protected int[][] bottomLevel;
@@ -20,8 +21,12 @@ public abstract class Game
     public abstract void clickTile(int x, int y, MouseEvent e);
     public abstract void win();
     public abstract void lose();
-    public boolean drawGrid()
+    public boolean getDrawGrid()
     {
         return drawGrid;
+    }
+    public String getName()
+    {
+        return name;
     }
 }

@@ -40,8 +40,10 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     {
         //put code needed to be run once upon startup here
         gameFontSize = 30;
-        buttons.add(new Button(new Rectangle(20, 40, 120, gameFontSize + 10), "mineswep", '☼'));
-        buttons.add(new Button(new Rectangle(20, 90, 120, gameFontSize + 10), "tictac", 'x'));
+        String label = "mines";
+        buttons.add(new Button(new Rectangle(20, 40, label.length() * gameFontSize / 2 + gameFontSize, gameFontSize + 10), label, '☼'));
+        label = "tictac";
+        buttons.add(new Button(new Rectangle(20, 90, label.length() * gameFontSize / 2 + gameFontSize, gameFontSize + 10), label, 'x'));
         xTrans = 70;
         yTrans = 70;
         gameLoaded = false;
@@ -58,9 +60,9 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 gameFontSize = 20;
                 xTrans = 70;
                 yTrans = 70;
-                game = new Minesweepo();
-                GameGridGorge.window.setTitle("Minecraft");
-                ((Minesweepo)game).newBoard(30, 20, 50);
+                game = new Minesweeper();
+                GameGridGorge.window.setTitle(game.getName());
+                ((Minesweeper)game).newBoard(30, 20, 50);
                 gameLoaded = true;
             }
             if(command == 'x')
@@ -70,7 +72,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 yTrans = 70;
                 //temp
                 game = new TicTacToe();
-                GameGridGorge.window.setTitle("TicTacToe");
+                GameGridGorge.window.setTitle(game.getName());
                 //any initialization
                 gameLoaded = true;
             }
@@ -116,7 +118,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
             g.setColor(hue);
             g.drawRect(xTrans, yTrans, game.width * gameFontSize, game.height * gameFontSize);
             
-            if(game.drawGrid())
+            if(game.getDrawGrid())
             {
                 for(int xOn = 0; xOn < game.width; xOn++)
                 {

@@ -9,7 +9,7 @@ import java.util.Random;
  *
  * @author L
  */
-public class Minesweepo extends Game
+public class Minesweeper extends Game
 {
     static Random RNG = new Random();
     /*
@@ -34,8 +34,9 @@ public class Minesweepo extends Game
     2 = numbered and reveal
     */
     
-    Minesweepo()
+    Minesweeper()
     {
+        name = "Minesweeper";
         bottomTranslation = new char[] {' ', '1', '2', '3', '4', '5', '6', '7', '8', '☼'};
         topTranslation = new char[] {'#', ' ', 'F', 'O', 'X'};
         drawGrid = false;
