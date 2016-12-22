@@ -49,7 +49,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     }
     private void addButton(int x, int y, String label, char cmd)
     {
-        buttons.add(new Button(new Rectangle(x, y, label.length() * gameFontSize / 2 + gameFontSize, gameFontSize + 10), label, cmd));
+        buttons.add(new Button(new Rectangle(x, y, label.length() * gameFontSize * 3 / 5, gameFontSize + 10), label, cmd));
     }
     public void run()
     {
@@ -61,7 +61,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 case '☼':
                 {
                     game = new Minesweeper();
-                    initGame(30, 70, 70);
+                    initGame(20, 70, 70);
                     ((Minesweeper)game).newBoard(30, 20, 50);
                     gameLoaded = true;
                 }
@@ -70,7 +70,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 {
                     game = new TicTacToe();
                     initGame(80, 70, 70);
-                    //any initialization
+                    //any initialization, espescially that of the grid (will be drawn after gameLoaded becomes true
                     gameLoaded = true;
                 }
             }
