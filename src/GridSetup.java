@@ -1,12 +1,12 @@
 
 public interface GridSetup {
-
-	public void setupGrid();
 	
-	public void setPlayerOne();
+	public void drawGrid();
 	
-	public void setPlayerTwo();
+	public void pOneTurn();
 	
-	public void setAI();
+	public void pEasyAI();
+	
+	public void pHardAI();
 	
 }
