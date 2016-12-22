@@ -31,6 +31,11 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     
     Colours c = new Colours();
     Game game;
+    /*
+    all games should extend the "game" class. 
+    any methods added to the subclass should have a check for that the "command" variable is equal to that of the subclass, then a downcast to use the variable
+    variables from the game superclass should be initialized in the subclass' constructer 
+    */
     SeePanel()
     {
         
@@ -70,7 +75,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 {
                     game = new TicTacToe();
                     initGame(80, 70, 70);
-                    //any initialization, espescially that of the grid (will be drawn after gameLoaded becomes true
+                    //any initialization, espescially that of the grid (will be drawn after gameLoaded becomes true)
                     gameLoaded = true;
                 }
             }
@@ -121,8 +126,10 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 }
             }
             g.setColor(hue);
-            g.drawRect(xTrans, yTrans, game.width * gameFontSize, game.height * gameFontSize);
-            
+            if(game.getDrawBorder())
+            {
+                g.drawRect(xTrans, yTrans, game.width * gameFontSize, game.height * gameFontSize);
+            }
             if(game.getDrawGrid())
             {
                 for(int xOn = 0; xOn < game.width; xOn++)

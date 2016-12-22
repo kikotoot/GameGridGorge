@@ -17,13 +17,17 @@ public abstract class Game
     protected char[] topTranslation;
     protected char[] bottomTranslation;
     protected boolean inGame = false, exit = false;
-    protected boolean drawGrid;
+    protected boolean drawGrid, drawBorder;
     public abstract void clickTile(int x, int y, MouseEvent e);
     public abstract void win();
     public abstract void lose();
     public boolean getDrawGrid()
     {
         return drawGrid;
+    }
+    public boolean getDrawBorder()
+    {
+        return drawBorder;
     }
     public String getName()
     {
