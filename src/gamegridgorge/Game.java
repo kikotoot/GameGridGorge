@@ -17,7 +17,7 @@ public abstract class Game
     protected char[] topTranslation;
     protected char[] bottomTranslation;
     protected boolean inGame = false, exit = false;
-    protected boolean drawGrid, drawBorder;
+    protected boolean drawGrid, drawBorder, coverLevels;
     public abstract void clickTile(int x, int y, MouseEvent e);
     public abstract void win();
     public abstract void lose();
@@ -28,6 +28,10 @@ public abstract class Game
     public boolean getDrawBorder()
     {
         return drawBorder;
+    }
+    public boolean getCoverLevels()
+    {
+        return coverLevels;
     }
     public String getName()
     {

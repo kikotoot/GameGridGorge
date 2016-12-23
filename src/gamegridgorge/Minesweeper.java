@@ -41,6 +41,7 @@ public class Minesweeper extends Game
         topTranslation = new char[] {'#', ' ', 'F', 'O', 'X'};
         drawGrid = false;
         drawBorder = true;
+        coverLevels = true;
     }
     
     @Override

@@ -45,8 +45,8 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
     {
         //put code needed to be run once upon startup here
         gameFontSize = 30;
-        addButton(40, 40, "minesweepre", '☼');
-        addButton(40, 90, "tictac", 'x');
+        addButton(40, 40, "Minesweeper", '☼');
+        addButton(40, 90, "Portals", 'o');
         xTrans = 70;
         yTrans = 70;
         gameLoaded = false;
@@ -73,15 +73,35 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 break;
                 case 'x':
                 {
+                    //appendix code
                     game = new TicTacToe();
                     initGame(80, 70, 70);
                     //any initialization, espescially that of the grid (will be drawn after gameLoaded becomes true)
+                    gameLoaded = true;
+                }
+                case 'o':
+                {
+                    game = new Portals();
+                    initGame(20, 70, 70);
+                    
                     gameLoaded = true;
                 }
             }
         }
         else
         {
+            switch(command)
+            {
+                //game specific run commands
+                case 'o':
+                {
+                    if(((Portals)game).turnTimer == 60)
+                    {
+                        ((Portals)game).enemyTurn();
+                    }
+                }
+                break;
+            }
             if(game.exit)
             {
                 command = ' ';
@@ -119,7 +139,8 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                     g.drawString("" + game.bottomTranslation[game.bottomLevel[xOn][yOn]], xOn * gameFontSize + xTrans + gameFontSize / 4, (yOn + 1) * gameFontSize + yTrans - gameFontSize / 4);
                     if(game.topTranslation[game.topLevel[xOn][yOn]] != ' ')
                     {
-                        g.fillRect(xOn * gameFontSize + xTrans, yOn * gameFontSize + yTrans, gameFontSize, gameFontSize);
+                        if(game.getCoverLevels())
+                            g.fillRect(xOn * gameFontSize + xTrans, yOn * gameFontSize + yTrans, gameFontSize, gameFontSize);
                         g.setColor(hue);
                         g.drawString("" + game.topTranslation[game.topLevel[xOn][yOn]], xOn * gameFontSize + xTrans + gameFontSize / 4, (yOn + 1) * gameFontSize + yTrans - gameFontSize / 4);
                     }
