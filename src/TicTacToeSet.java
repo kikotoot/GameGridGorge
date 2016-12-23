@@ -10,7 +10,7 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
+// check tic tac toe for backup code
 public class TicTacToeSet extends JPanel implements KeyListener, MouseMotionListener {
 
 	private char[][] playerPosition = new char[3][3];
@@ -89,31 +89,35 @@ public class TicTacToeSet extends JPanel implements KeyListener, MouseMotionList
 					if (this.playerPosition[i][j] == 'O') {
 						if (i == 0 && j == 1) {
 							if (this.turnCountAI == 1) {
-
+								this.playerPosition[2][0] = 'X';
+								this.turnCountAI++;
 							}
 							else{
 								for (int k = 0; k < 3; i++) {
 									for (int l = 0; l < 3; j++) {
 										if (this.playerPosition[k][l] == 'O' && k != i && l != j) {
 											if (this.turnCountAI == 2){
-												
+												if(k == 1 && l == 0){
+													this.playerPosition[2][2] = 'X';
+													this.turnCountAI++;
+												}
+												else{
+													this.playerPosition[1][0] = 'X';
+													//game over
+												}
 											}
 											else{
 												for (int m = 0; m < 3; i++) {
 													for (int n = 0; n < 3; j++) {
 														if (this.playerPosition[m][n] == 'O' && m != k && n != l) {
 															if (this.turnCountAI == 3){
-																
-															}
-															else{
-																for (int o = 0; o < 3; i++) {
-																	for (int p = 0; p < 3; j++) {
-																		if (this.playerPosition[o][p] == 'O' && o != m && p != n) {
-																			if (this.turnCountAI == 4){
-																				
-																			}
-																		}
-																	}
+																if(m == 1 && n == 1){
+																	this.playerPosition[2][1] = 'X';
+																	//game over
+																}
+																else{
+																	this.playerPosition[1][1] = 'X';
+																	//game over
 																}
 															}
 														}
@@ -127,31 +131,35 @@ public class TicTacToeSet extends JPanel implements KeyListener, MouseMotionList
 						}
 						if (i == 0 && j == 2) {
 							if (this.turnCountAI == 1) {
-
+								this.playerPosition[2][2] = 'X';
+								this.turnCountAI++;
 							}
 							else{
 								for (int k = 0; k < 3; i++) {
 									for (int l = 0; l < 3; j++) {
 										if (this.playerPosition[k][l] == 'O' && k != i && l != j) {
 											if (this.turnCountAI == 2){
-												
+												if(k != 1 && l != 1){
+													this.playerPosition[1][1] = 'X';
+													//game over
+												}
+												else{
+													this.playerPosition[2][0] = 'X';
+													this.turnCountAI++;
+												}
 											}
 											else{
 												for (int m = 0; m < 3; i++) {
 													for (int n = 0; n < 3; j++) {
 														if (this.playerPosition[m][n] == 'O' && m != k && n != l) {
 															if (this.turnCountAI == 3){
-																
-															}
-															else{
-																for (int o = 0; o < 3; i++) {
-																	for (int p = 0; p < 3; j++) {
-																		if (this.playerPosition[o][p] == 'O' && o != m && p != n) {
-																			if (this.turnCountAI == 4){
-																				
-																			}
-																		}
-																	}
+																if(m != 1 && n != 0){
+																	this.playerPosition[1][0] = 'X';
+																	//game over
+																}
+																else{
+																	this.playerPosition[2][1] = 'X';
+																	//game over
 																}
 															}
 														}
@@ -165,31 +173,35 @@ public class TicTacToeSet extends JPanel implements KeyListener, MouseMotionList
 						}
 						if (i == 1 && j == 0) {
 							if (this.turnCountAI == 1) {
-
+								this.playerPosition[0][2] = 'X';
+								this.turnCountAI++;
 							}
 							else{
 								for (int k = 0; k < 3; i++) {
 									for (int l = 0; l < 3; j++) {
 										if (this.playerPosition[k][l] == 'O' && k != i && l != j) {
 											if (this.turnCountAI == 2){
-												
+												if(k != 0 && l != 1){
+													this.playerPosition[0][1] = 'X';
+													//game over
+												}
+												else{
+													this.playerPosition[2][2] = 'X';
+													this.turnCountAI++;
+												}
 											}
 											else{
 												for (int m = 0; m < 3; i++) {
 													for (int n = 0; n < 3; j++) {
 														if (this.playerPosition[m][n] == 'O' && m != k && n != l) {
 															if (this.turnCountAI == 3){
-																
-															}
-															else{
-																for (int o = 0; o < 3; i++) {
-																	for (int p = 0; p < 3; j++) {
-																		if (this.playerPosition[o][p] == 'O' && o != m && p != n) {
-																			if (this.turnCountAI == 4){
-																				
-																			}
-																		}
-																	}
+																if(m != 1 && n != 1){
+																	this.playerPosition[1][1] = 'X';
+																	//game over
+																}
+																else{
+																	this.playerPosition[1][2] = 'X';
+																	//game over
 																}
 															}
 														}
@@ -203,28 +215,48 @@ public class TicTacToeSet extends JPanel implements KeyListener, MouseMotionList
 						}
 						if (i == 1 && j == 1) {
 							if (this.turnCountAI == 1) {
-
+								this.playerPosition[2][0] = 'X';
+								this.turnCountAI++;
 							}
 							else{
 								for (int k = 0; k < 3; i++) {
 									for (int l = 0; l < 3; j++) {
 										if (this.playerPosition[k][l] == 'O' && k != i && l != j) {
 											if (this.turnCountAI == 2){
-												
+												if(k != 1 && l != 0){
+													this.playerPosition[1][0] = 'X';
+													//game over
+												}
+												else{
+													this.playerPosition[1][2] = 'X';
+													this.turnCountAI++;
+												}
 											}
 											else{
 												for (int m = 0; m < 3; i++) {
 													for (int n = 0; n < 3; j++) {
 														if (this.playerPosition[m][n] == 'O' && m != k && n != l) {
 															if (this.turnCountAI == 3){
-																
+																if(m == 0 && n == 1){
+																	this.playerPosition[2][1] = 'X';
+																	this.turnCountAI++;
+																}
+																else if(m == 2 && n == 1){
+																	this.playerPosition[0][1] = 'X';
+																	this.turnCountAI++;
+																}
+																else{
+																	this.playerPosition[0][1] = 'X';
+																	this.turnCountAI++;
+																}
 															}
 															else{
 																for (int o = 0; o < 3; i++) {
 																	for (int p = 0; p < 3; j++) {
-																		if (this.playerPosition[o][p] == 'O' && o != m && p != n) {
+																		if (this.playerPosition[o][p] == ' ') {
 																			if (this.turnCountAI == 4){
-																				
+																				this.playerPosition[o][p] = 'X';
+																				//tie
 																			}
 																		}
 																	}
@@ -241,31 +273,35 @@ public class TicTacToeSet extends JPanel implements KeyListener, MouseMotionList
 						}
 						if (i == 1 && j == 2) {
 							if (this.turnCountAI == 1) {
-
+								this.playerPosition[0][2] = 'X';
+								this.turnCountAI++;
 							}
 							else{
 								for (int k = 0; k < 3; i++) {
 									for (int l = 0; l < 3; j++) {
 										if (this.playerPosition[k][l] == 'O' && k != i && l != j) {
 											if (this.turnCountAI == 2){
-												
+												if(k != 0 && l != 1){
+													this.playerPosition[0][1] = 'X';
+													//game over
+												}
+												else{
+													this.playerPosition[2][0] = 'X';
+													this.turnCountAI++;
+												}
 											}
 											else{
 												for (int m = 0; m < 3; i++) {
 													for (int n = 0; n < 3; j++) {
 														if (this.playerPosition[m][n] == 'O' && m != k && n != l) {
 															if (this.turnCountAI == 3){
-																
-															}
-															else{
-																for (int o = 0; o < 3; i++) {
-																	for (int p = 0; p < 3; j++) {
-																		if (this.playerPosition[o][p] == 'O' && o != m && p != n) {
-																			if (this.turnCountAI == 4){
-																				
-																			}
-																		}
-																	}
+																if(m != 1 && n != 1){
+																	this.playerPosition[1][1] = 'X';
+																	//game over
+																}
+																else{
+																	this.playerPosition[1][0] = 'X';
+																	//game over
 																}
 															}
 														}
@@ -279,31 +315,35 @@ public class TicTacToeSet extends JPanel implements KeyListener, MouseMotionList
 						}
 						if (i == 2 && j == 0) {
 							if (this.turnCountAI == 1) {
-
+								this.playerPosition[0][2] = 'X';
+								this.turnCountAI++;
 							}
 							else{
 								for (int k = 0; k < 3; i++) {
 									for (int l = 0; l < 3; j++) {
 										if (this.playerPosition[k][l] == 'O' && k != i && l != j) {
 											if (this.turnCountAI == 2){
-												
+												if(k != 0 && l != 1){
+													this.playerPosition[0][1] = 'X';
+													//game over
+												}
+												else{
+													this.playerPosition[2][2] = 'X';
+													this.turnCountAI++;
+												}
 											}
 											else{
 												for (int m = 0; m < 3; i++) {
 													for (int n = 0; n < 3; j++) {
 														if (this.playerPosition[m][n] == 'O' && m != k && n != l) {
 															if (this.turnCountAI == 3){
-																
-															}
-															else{
-																for (int o = 0; o < 3; i++) {
-																	for (int p = 0; p < 3; j++) {
-																		if (this.playerPosition[o][p] == 'O' && o != m && p != n) {
-																			if (this.turnCountAI == 4){
-																				
-																			}
-																		}
-																	}
+																if(m != 1 && n != 1){
+																	this.playerPosition[1][1] = 'X';
+																	//game over
+																}
+																else{
+																	this.playerPosition[1][2] = 'X';
+																	//game over
 																}
 															}
 														}
@@ -317,31 +357,35 @@ public class TicTacToeSet extends JPanel implements KeyListener, MouseMotionList
 						}
 						if (i == 2 && j == 1) {
 							if (this.turnCountAI == 1) {
-
+								this.playerPosition[2][0] = 'X';
+								this.turnCountAI++;
 							}
 							else{
 								for (int k = 0; k < 3; i++) {
 									for (int l = 0; l < 3; j++) {
 										if (this.playerPosition[k][l] == 'O' && k != i && l != j) {
 											if (this.turnCountAI == 2){
-												
+												if(k != 1 && l != 0){
+													this.playerPosition[1][0] = 'X';
+													//game over
+												}
+												else{
+													this.playerPosition[0][2] = 'X';
+													this.turnCountAI++;
+												}
 											}
 											else{
 												for (int m = 0; m < 3; i++) {
 													for (int n = 0; n < 3; j++) {
 														if (this.playerPosition[m][n] == 'O' && m != k && n != l) {
 															if (this.turnCountAI == 3){
-																
-															}
-															else{
-																for (int o = 0; o < 3; i++) {
-																	for (int p = 0; p < 3; j++) {
-																		if (this.playerPosition[o][p] == 'O' && o != m && p != n) {
-																			if (this.turnCountAI == 4){
-																				
-																			}
-																		}
-																	}
+																if(m != 1 && n != 1){
+																	this.playerPosition[1][1] = 'X';
+																	//game over
+																}
+																else{
+																	this.playerPosition[0][1] = 'X';
+																	//game over
 																}
 															}
 														}
@@ -355,31 +399,35 @@ public class TicTacToeSet extends JPanel implements KeyListener, MouseMotionList
 						}
 						if (i == 2 && j == 2) {
 							if (this.turnCountAI == 1) {
-
+								this.playerPosition[0][2] = 'X';
+								this.turnCountAI++;
 							}
 							else{
 								for (int k = 0; k < 3; i++) {
 									for (int l = 0; l < 3; j++) {
 										if (this.playerPosition[k][l] == 'O' && k != i && l != j) {
 											if (this.turnCountAI == 2){
-												
+												if(k != 0 && l != 1){
+													this.playerPosition[0][1] = 'X';
+													//game over
+												}
+												else{
+													this.playerPosition[2][0] = 'X';
+													this.turnCountAI++;
+												}
 											}
 											else{
 												for (int m = 0; m < 3; i++) {
 													for (int n = 0; n < 3; j++) {
 														if (this.playerPosition[m][n] == 'O' && m != k && n != l) {
 															if (this.turnCountAI == 3){
-																
-															}
-															else{
-																for (int o = 0; o < 3; i++) {
-																	for (int p = 0; p < 3; j++) {
-																		if (this.playerPosition[o][p] == 'O' && o != m && p != n) {
-																			if (this.turnCountAI == 4){
-																				
-																			}
-																		}
-																	}
+																if(m != 1 && n != 1){
+																	this.playerPosition[1][1] = 'X';
+																	//game over
+																}
+																else{
+																	this.playerPosition[1][0] = 'X';
+																	//game over
 																}
 															}
 														}
