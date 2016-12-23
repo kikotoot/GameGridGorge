@@ -500,7 +500,7 @@ public class TicTacToe extends Game
                 }
                 break;
             }
-            endCheckAI();
+            endCheck2P();
         }
         else
             exit = true;
