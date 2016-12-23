@@ -53,22 +53,28 @@ public class Portals extends Game
             {
                 int tempX = RNG.nextInt(w);
                 int tempY = RNG.nextInt(h);
-                if(bottomLevel[tempX][tempY] != 2 && (tempX != 0 || tempY != 0))
+                if(bottomLevel[tempX][tempY] != 2 && (tempX != 0 || tempY != 0) && (tempX != width - 1 || tempY != height - 1))
                 {
                     bottomLevel[tempX][tempY] = 2;
                     p++;
                 }
             }
         placePieces();
+        inGame = true;
     }
     @Override
     public void clickTile(int x, int y, MouseEvent e)
     {
-        if(turnTimer == 0)
+        if(inGame)
         {
-            turnTimer = 120;
-            playerTurn();
+            if(turnTimer == 0)
+            {
+                turnTimer = 120;
+                playerTurn();
+            }
         }
+        else
+            exit = true;
     }
     public void playerTurn()
     {
@@ -84,7 +90,10 @@ public class Portals extends Game
                 }
                 else
                 {
-                    human.y++;
+                    if(human.y != 9)
+                        human.y++;
+                    else
+                        win();
                 }
             }
             else
@@ -115,7 +124,10 @@ public class Portals extends Game
                 }
                 else
                 {
-                    comp.y++;
+                    if(comp.y != 9)
+                        comp.y++;
+                    else
+                        lose();
                 }
             }
             else
@@ -144,42 +156,62 @@ public class Portals extends Game
     }
     public void teleport()
     {
-        int pOn = width * height / 10;
-        for(int xOn = 0; xOn < width; xOn++)
+        if(turnTimer == 30 && bottomLevel[comp.x][comp.y] == 2)
         {
-            for(int yOn = 0; yOn < height; yOn++)
+            int pOn = width * height / 10;
+            for(int xOn = 0; xOn < width; xOn++)
             {
-                if(bottomLevel[xOn][yOn] == 2)
+                for(int yOn = 0; yOn < height; yOn++)
                 {
-                    pOn--;
-                    if(RNG.nextInt(pOn + 1) == 0)
+                    if(bottomLevel[xOn][yOn] == 2)
                     {
-                        if(turnTimer == 30)
+                        pOn--;
+                        if(RNG.nextInt(pOn + 1) == 0)
                         {
                             //teleport the comp
-
-                        }
-                        else if(turnTimer == 90)
-                        {
-                            //teleport player
+                            comp.x = xOn;
+                            comp.y = yOn;
                         }
                     }
                 }
             }
+            placePieces();
         }
-        placePieces();
+        if(turnTimer == 90 && bottomLevel[human.x][human.y] == 2)
+        {
+            int pOn = width * height / 10;
+            for(int xOn = 0; xOn < width; xOn++)
+            {
+                for(int yOn = 0; yOn < height; yOn++)
+                {
+                    if(bottomLevel[xOn][yOn] == 2)
+                    {
+                        pOn--;
+                        if(RNG.nextInt(pOn + 1) == 0)
+                        {
+                            //teleport player
+                            human.x = xOn;
+                            human.y = yOn;
+                        }
+                    }
+                }
+            }
+            placePieces();
+        }
     }
 
     @Override
     public void win() 
     {
-        
+        inGame = false;
+        System.out.println("you win");
     }
 
     @Override
     public void lose() 
     {
-        
+        inGame = false;
+        System.out.println("you dont win");
     }
     
 }

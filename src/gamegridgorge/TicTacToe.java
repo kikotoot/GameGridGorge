@@ -17,6 +17,7 @@ public class TicTacToe extends Game
 	private boolean gameOver = false;
 	private boolean won = false;
 	private int turnCountAI = 0;
+        private int whoseTurn = 1;
 
         
         /*
@@ -483,7 +484,24 @@ public class TicTacToe extends Game
     public void clickTile(int x, int y, MouseEvent e) 
     {
         if(inGame)
-            turnP2(x, y);
+        {
+            switch(whoseTurn)
+            {
+                case 1:
+                {
+                    turnP1(x, y);
+                    whoseTurn = 2;
+                }
+                break;
+                case 2:
+                {
+                    turnP2(x, y);
+                    whoseTurn = 1;
+                }
+                break;
+            }
+            endCheckAI();
+        }
         else
             exit = true;
     }

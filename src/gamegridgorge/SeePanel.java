@@ -106,6 +106,11 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                         ((Portals)game).turnTimer--;
                 }
                 break;
+                case 'x':
+                {
+                    //((TicTacToe)game).turnAI();
+                }
+                break;
             }
             if(game.exit)
             {
