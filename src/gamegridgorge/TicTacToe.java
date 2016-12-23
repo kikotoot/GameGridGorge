@@ -40,6 +40,7 @@ public class TicTacToe extends Game
             drawGrid = true;
             drawBorder = true;
             coverLevels = false;
+            inGame = true;
             //initialize boards with just the simple new array
 	}
 
@@ -50,358 +51,358 @@ public class TicTacToe extends Game
 	// turn)
 	// AI goes first always
 	public void turnAI() {
-		if (this.turnCountAI == 0) {
-			this.bottomLevel[0][0] = 1;
-			this.turnCountAI++;
-		}
-		if (this.turnCountAI > 0) {
-			for (int i = 0; i < 3; i++) {
-				for (int j = 0; j < 3; j++) {
-					if (this.bottomLevel[i][j] == 2) {
-						if (i == 0 && j == 1) {
-							if (this.turnCountAI == 1) {
-								this.bottomLevel[2][0] = 1;
-								this.turnCountAI++;
-							} else {
-								for (int k = 0; k < 3; i++) {
-									for (int l = 0; l < 3; j++) {
-										if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
-											if (this.turnCountAI == 2) {
-												if (k == 1 && l == 0) {
-													this.bottomLevel[2][2] = 1;
-													this.turnCountAI++;
-												} else {
-													this.bottomLevel[1][0] = 1;
-													this.gameOver = true;
-												}
-											} else if (!this.gameOver) {
-												for (int m = 0; m < 3; i++) {
-													for (int n = 0; n < 3; j++) {
-														if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
-															if (this.turnCountAI == 3) {
-																if (m == 1 && n == 1) {
-																	this.bottomLevel[2][1] = 1;
-																	this.gameOver = true;
-																	// game over
-																} else {
-																	this.bottomLevel[1][1] = 1;
-																	this.gameOver = true;
-																	// game over
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-						if (i == 0 && j == 2) {
-							if (this.turnCountAI == 1) {
-								this.bottomLevel[2][2] = 1;
-								this.turnCountAI++;
-							} else {
-								for (int k = 0; k < 3; i++) {
-									for (int l = 0; l < 3; j++) {
-										if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
-											if (this.turnCountAI == 2) {
-												if (k != 1 && l != 1) {
-													this.bottomLevel[1][1] = 1;
-													this.gameOver = true;
-													// game over
-												} else {
-													this.bottomLevel[2][0] = 1;
-													this.turnCountAI++;
-												}
-											} else if (!this.gameOver) {
-												for (int m = 0; m < 3; i++) {
-													for (int n = 0; n < 3; j++) {
-														if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
-															if (this.turnCountAI == 3) {
-																if (m != 1 && n != 0) {
-																	this.bottomLevel[1][0] = 1;
-																	this.gameOver = true;
-																	// game over
-																} else {
-																	this.bottomLevel[2][1] = 1;
-																	this.gameOver = true;
-																	// game over
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-						if (i == 1 && j == 0) {
-							if (this.turnCountAI == 1) {
-								this.bottomLevel[0][2] = 1;
-								this.turnCountAI++;
-							} else {
-								for (int k = 0; k < 3; i++) {
-									for (int l = 0; l < 3; j++) {
-										if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
-											if (this.turnCountAI == 2) {
-												if (k != 0 && l != 1) {
-													this.bottomLevel[0][1] = 1;
-													this.gameOver = true;
-													// game over
-												} else {
-													this.bottomLevel[2][2] = 1;
-													this.turnCountAI++;
-												}
-											} else if (!this.gameOver) {
-												for (int m = 0; m < 3; i++) {
-													for (int n = 0; n < 3; j++) {
-														if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
-															if (this.turnCountAI == 3) {
-																if (m != 1 && n != 1) {
-																	this.bottomLevel[1][1] = 1;
-																	this.gameOver = true;
-																	// game over
-																} else {
-																	this.bottomLevel[1][2] = 1;
-																	this.gameOver = true;
-																	// game over
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-						if (i == 1 && j == 1) {
-							if (this.turnCountAI == 1) {
-								this.bottomLevel[2][0] = 1;
-								this.turnCountAI++;
-							} else {
-								for (int k = 0; k < 3; i++) {
-									for (int l = 0; l < 3; j++) {
-										if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
-											if (this.turnCountAI == 2) {
-												if (k != 1 && l != 0) {
-													this.bottomLevel[1][0] = 1;
-													this.gameOver = true;
-													// game over
-												} else {
-													this.bottomLevel[1][2] = 1;
-													this.turnCountAI++;
-												}
-											} else if (!this.gameOver) {
-												for (int m = 0; m < 3; i++) {
-													for (int n = 0; n < 3; j++) {
-														if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
-															if (this.turnCountAI == 3) {
-																if (m == 0 && n == 1) {
-																	this.bottomLevel[2][1] = 1;
-																	this.turnCountAI++;
-																} else if (m == 2 && n == 1) {
-																	this.bottomLevel[0][1] = 1;
-																	this.turnCountAI++;
-																} else {
-																	this.bottomLevel[0][1] = 1;
-																	this.turnCountAI++;
-																}
-															} else {
-																for (int o = 0; o < 3; i++) {
-																	for (int p = 0; p < 3; j++) {
-																		if (this.bottomLevel[o][p] == ' ') {
-																			if (this.turnCountAI == 4) {
-																				this.bottomLevel[o][p] = 1;
-																				this.tie = true;
-																				// tie
-																			}
-																		}
-																	}
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-						if (i == 1 && j == 2) {
-							if (this.turnCountAI == 1) {
-								this.bottomLevel[0][2] = 1;
-								this.turnCountAI++;
-							} else {
-								for (int k = 0; k < 3; i++) {
-									for (int l = 0; l < 3; j++) {
-										if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
-											if (this.turnCountAI == 2) {
-												if (k != 0 && l != 1) {
-													this.bottomLevel[0][1] = 1;
-													this.gameOver = true;
-													// game over
-												} else {
-													this.bottomLevel[2][0] = 1;
-													this.turnCountAI++;
-												}
-											} else if (!this.gameOver) {
-												for (int m = 0; m < 3; i++) {
-													for (int n = 0; n < 3; j++) {
-														if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
-															if (this.turnCountAI == 3) {
-																if (m != 1 && n != 1) {
-																	this.bottomLevel[1][1] = 1;
-																	this.gameOver = true;
-																	// game over
-																} else {
-																	this.bottomLevel[1][0] = 1;
-																	this.gameOver = true;
-																	// game over
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-						if (i == 2 && j == 0) {
-							if (this.turnCountAI == 1) {
-								this.bottomLevel[0][2] = 1;
-								this.turnCountAI++;
-							} else {
-								for (int k = 0; k < 3; i++) {
-									for (int l = 0; l < 3; j++) {
-										if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
-											if (this.turnCountAI == 2) {
-												if (k != 0 && l != 1) {
-													this.bottomLevel[0][1] = 1;
-													this.gameOver = true;
-													// game over
-												} else {
-													this.bottomLevel[2][2] = 1;
-													this.turnCountAI++;
-												}
-											} else if (!this.gameOver) {
-												for (int m = 0; m < 3; i++) {
-													for (int n = 0; n < 3; j++) {
-														if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
-															if (this.turnCountAI == 3) {
-																if (m != 1 && n != 1) {
-																	this.bottomLevel[1][1] = 1;
-																	this.gameOver = true;
-																	// game over
-																} else {
-																	this.bottomLevel[1][2] = 1;
-																	this.gameOver = true;
-																	// game over
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-						if (i == 2 && j == 1) {
-							if (this.turnCountAI == 1) {
-								this.bottomLevel[2][0] = 1;
-								this.turnCountAI++;
-							} else {
-								for (int k = 0; k < 3; i++) {
-									for (int l = 0; l < 3; j++) {
-										if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
-											if (this.turnCountAI == 2) {
-												if (k != 1 && l != 0) {
-													this.bottomLevel[1][0] = 1;
-													this.gameOver = true;
-													// game over
-												} else {
-													this.bottomLevel[0][2] = 1;
-													this.turnCountAI++;
-												}
-											} else if (!this.gameOver) {
-												for (int m = 0; m < 3; i++) {
-													for (int n = 0; n < 3; j++) {
-														if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
-															if (this.turnCountAI == 3) {
-																if (m != 1 && n != 1) {
-																	this.bottomLevel[1][1] = 1;
-																	this.gameOver = true;
-																	// game over
-																} else {
-																	this.bottomLevel[0][1] = 1;
-																	this.gameOver = true;
-																	// game over
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-						if (i == 2 && j == 2) {
-							if (this.turnCountAI == 1) {
-								this.bottomLevel[0][2] = 1;
-								this.turnCountAI++;
-							} else {
-								for (int k = 0; k < 3; i++) {
-									for (int l = 0; l < 3; j++) {
-										if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
-											if (this.turnCountAI == 2) {
-												if (k != 0 && l != 1) {
-													this.bottomLevel[0][1] = 1;
-													this.gameOver = true;
-													// game over
-												} else {
-													this.bottomLevel[2][0] = 1;
-													this.turnCountAI++;
-												}
-											} else if (!this.gameOver) {
-												for (int m = 0; m < 3; i++) {
-													for (int n = 0; n < 3; j++) {
-														if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
-															if (this.turnCountAI == 3) {
-																if (m != 1 && n != 1) {
-																	this.bottomLevel[1][1] = 1;
-																	this.gameOver = true;
-																	// game over
-																} else {
-																	this.bottomLevel[1][0] = 1;
-																	this.gameOver = true;
-																	// game over
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+            if (this.turnCountAI == 0) {
+                    this.bottomLevel[0][0] = 1;
+                    this.turnCountAI++;
+            }
+            if (this.turnCountAI > 0) {
+                    for (int i = 0; i < 3; i++) {
+                        for (int j = 0; j < 3; j++) {
+                            if (this.bottomLevel[i][j] == 2) {
+                                    if (i == 0 && j == 1) {
+                                            if (this.turnCountAI == 1) {
+                                                    this.bottomLevel[2][0] = 1;
+                                                    this.turnCountAI++;
+                                            } else {
+                                                    for (int k = 0; k < 3; i++) {
+                                                            for (int l = 0; l < 3; j++) {
+                                                                    if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
+                                                                            if (this.turnCountAI == 2) {
+                                                                                    if (k == 1 && l == 0) {
+                                                                                            this.bottomLevel[2][2] = 1;
+                                                                                            this.turnCountAI++;
+                                                                                    } else {
+                                                                                            this.bottomLevel[1][0] = 1;
+                                                                                            this.gameOver = true;
+                                                                                    }
+                                                                            } else if (!this.gameOver) {
+                                                                                    for (int m = 0; m < 3; i++) {
+                                                                                            for (int n = 0; n < 3; j++) {
+                                                                                                    if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
+                                                                                                            if (this.turnCountAI == 3) {
+                                                                                                                    if (m == 1 && n == 1) {
+                                                                                                                            this.bottomLevel[2][1] = 1;
+                                                                                                                            this.gameOver = true;
+                                                                                                                            // game over
+                                                                                                                    } else {
+                                                                                                                            this.bottomLevel[1][1] = 1;
+                                                                                                                            this.gameOver = true;
+                                                                                                                            // game over
+                                                                                                                    }
+                                                                                                            }
+                                                                                                    }
+                                                                                            }
+                                                                                    }
+                                                                            }
+                                                                    }
+                                                            }
+                                                    }
+                                            }
+                                    }
+                                    if (i == 0 && j == 2) {
+                                            if (this.turnCountAI == 1) {
+                                                    this.bottomLevel[2][2] = 1;
+                                                    this.turnCountAI++;
+                                            } else {
+                                                    for (int k = 0; k < 3; i++) {
+                                                            for (int l = 0; l < 3; j++) {
+                                                                    if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
+                                                                            if (this.turnCountAI == 2) {
+                                                                                    if (k != 1 && l != 1) {
+                                                                                            this.bottomLevel[1][1] = 1;
+                                                                                            this.gameOver = true;
+                                                                                            // game over
+                                                                                    } else {
+                                                                                            this.bottomLevel[2][0] = 1;
+                                                                                            this.turnCountAI++;
+                                                                                    }
+                                                                            } else if (!this.gameOver) {
+                                                                                    for (int m = 0; m < 3; i++) {
+                                                                                            for (int n = 0; n < 3; j++) {
+                                                                                                    if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
+                                                                                                            if (this.turnCountAI == 3) {
+                                                                                                                    if (m != 1 && n != 0) {
+                                                                                                                            this.bottomLevel[1][0] = 1;
+                                                                                                                            this.gameOver = true;
+                                                                                                                            // game over
+                                                                                                                    } else {
+                                                                                                                            this.bottomLevel[2][1] = 1;
+                                                                                                                            this.gameOver = true;
+                                                                                                                            // game over
+                                                                                                                    }
+                                                                                                            }
+                                                                                                    }
+                                                                                            }
+                                                                                    }
+                                                                            }
+                                                                    }
+                                                            }
+                                                    }
+                                            }
+                                    }
+                                    if (i == 1 && j == 0) {
+                                            if (this.turnCountAI == 1) {
+                                                    this.bottomLevel[0][2] = 1;
+                                                    this.turnCountAI++;
+                                            } else {
+                                                    for (int k = 0; k < 3; i++) {
+                                                            for (int l = 0; l < 3; j++) {
+                                                                    if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
+                                                                            if (this.turnCountAI == 2) {
+                                                                                    if (k != 0 && l != 1) {
+                                                                                            this.bottomLevel[0][1] = 1;
+                                                                                            this.gameOver = true;
+                                                                                            // game over
+                                                                                    } else {
+                                                                                            this.bottomLevel[2][2] = 1;
+                                                                                            this.turnCountAI++;
+                                                                                    }
+                                                                            } else if (!this.gameOver) {
+                                                                                    for (int m = 0; m < 3; i++) {
+                                                                                            for (int n = 0; n < 3; j++) {
+                                                                                                    if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
+                                                                                                            if (this.turnCountAI == 3) {
+                                                                                                                    if (m != 1 && n != 1) {
+                                                                                                                            this.bottomLevel[1][1] = 1;
+                                                                                                                            this.gameOver = true;
+                                                                                                                            // game over
+                                                                                                                    } else {
+                                                                                                                            this.bottomLevel[1][2] = 1;
+                                                                                                                            this.gameOver = true;
+                                                                                                                            // game over
+                                                                                                                    }
+                                                                                                            }
+                                                                                                    }
+                                                                                            }
+                                                                                    }
+                                                                            }
+                                                                    }
+                                                            }
+                                                    }
+                                            }
+                                    }
+                                    if (i == 1 && j == 1) {
+                                            if (this.turnCountAI == 1) {
+                                                    this.bottomLevel[2][0] = 1;
+                                                    this.turnCountAI++;
+                                            } else {
+                                                    for (int k = 0; k < 3; i++) {
+                                                            for (int l = 0; l < 3; j++) {
+                                                                    if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
+                                                                            if (this.turnCountAI == 2) {
+                                                                                    if (k != 1 && l != 0) {
+                                                                                            this.bottomLevel[1][0] = 1;
+                                                                                            this.gameOver = true;
+                                                                                            // game over
+                                                                                    } else {
+                                                                                            this.bottomLevel[1][2] = 1;
+                                                                                            this.turnCountAI++;
+                                                                                    }
+                                                                            } else if (!this.gameOver) {
+                                                                                    for (int m = 0; m < 3; i++) {
+                                                                                            for (int n = 0; n < 3; j++) {
+                                                                                                    if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
+                                                                                                            if (this.turnCountAI == 3) {
+                                                                                                                    if (m == 0 && n == 1) {
+                                                                                                                            this.bottomLevel[2][1] = 1;
+                                                                                                                            this.turnCountAI++;
+                                                                                                                    } else if (m == 2 && n == 1) {
+                                                                                                                            this.bottomLevel[0][1] = 1;
+                                                                                                                            this.turnCountAI++;
+                                                                                                                    } else {
+                                                                                                                            this.bottomLevel[0][1] = 1;
+                                                                                                                            this.turnCountAI++;
+                                                                                                                    }
+                                                                                                            } else {
+                                                                                                                    for (int o = 0; o < 3; i++) {
+                                                                                                                            for (int p = 0; p < 3; j++) {
+                                                                                                                                    if (this.bottomLevel[o][p] == ' ') {
+                                                                                                                                            if (this.turnCountAI == 4) {
+                                                                                                                                                    this.bottomLevel[o][p] = 1;
+                                                                                                                                                    this.tie = true;
+                                                                                                                                                    // tie
+                                                                                                                                            }
+                                                                                                                                    }
+                                                                                                                            }
+                                                                                                                    }
+                                                                                                            }
+                                                                                                    }
+                                                                                            }
+                                                                                    }
+                                                                            }
+                                                                    }
+                                                            }
+                                                    }
+                                            }
+                                    }
+                                    if (i == 1 && j == 2) {
+                                            if (this.turnCountAI == 1) {
+                                                    this.bottomLevel[0][2] = 1;
+                                                    this.turnCountAI++;
+                                            } else {
+                                                    for (int k = 0; k < 3; i++) {
+                                                            for (int l = 0; l < 3; j++) {
+                                                                    if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
+                                                                            if (this.turnCountAI == 2) {
+                                                                                    if (k != 0 && l != 1) {
+                                                                                            this.bottomLevel[0][1] = 1;
+                                                                                            this.gameOver = true;
+                                                                                            // game over
+                                                                                    } else {
+                                                                                            this.bottomLevel[2][0] = 1;
+                                                                                            this.turnCountAI++;
+                                                                                    }
+                                                                            } else if (!this.gameOver) {
+                                                                                    for (int m = 0; m < 3; i++) {
+                                                                                            for (int n = 0; n < 3; j++) {
+                                                                                                    if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
+                                                                                                            if (this.turnCountAI == 3) {
+                                                                                                                    if (m != 1 && n != 1) {
+                                                                                                                            this.bottomLevel[1][1] = 1;
+                                                                                                                            this.gameOver = true;
+                                                                                                                            // game over
+                                                                                                                    } else {
+                                                                                                                            this.bottomLevel[1][0] = 1;
+                                                                                                                            this.gameOver = true;
+                                                                                                                            // game over
+                                                                                                                    }
+                                                                                                            }
+                                                                                                    }
+                                                                                            }
+                                                                                    }
+                                                                            }
+                                                                    }
+                                                            }
+                                                    }
+                                            }
+                                    }
+                                    if (i == 2 && j == 0) {
+                                            if (this.turnCountAI == 1) {
+                                                    this.bottomLevel[0][2] = 1;
+                                                    this.turnCountAI++;
+                                            } else {
+                                                    for (int k = 0; k < 3; i++) {
+                                                            for (int l = 0; l < 3; j++) {
+                                                                    if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
+                                                                            if (this.turnCountAI == 2) {
+                                                                                    if (k != 0 && l != 1) {
+                                                                                            this.bottomLevel[0][1] = 1;
+                                                                                            this.gameOver = true;
+                                                                                            // game over
+                                                                                    } else {
+                                                                                            this.bottomLevel[2][2] = 1;
+                                                                                            this.turnCountAI++;
+                                                                                    }
+                                                                            } else if (!this.gameOver) {
+                                                                                    for (int m = 0; m < 3; i++) {
+                                                                                            for (int n = 0; n < 3; j++) {
+                                                                                                    if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
+                                                                                                            if (this.turnCountAI == 3) {
+                                                                                                                    if (m != 1 && n != 1) {
+                                                                                                                            this.bottomLevel[1][1] = 1;
+                                                                                                                            this.gameOver = true;
+                                                                                                                            // game over
+                                                                                                                    } else {
+                                                                                                                            this.bottomLevel[1][2] = 1;
+                                                                                                                            this.gameOver = true;
+                                                                                                                            // game over
+                                                                                                                    }
+                                                                                                            }
+                                                                                                    }
+                                                                                            }
+                                                                                    }
+                                                                            }
+                                                                    }
+                                                            }
+                                                    }
+                                            }
+                                    }
+                                    if (i == 2 && j == 1) {
+                                            if (this.turnCountAI == 1) {
+                                                    this.bottomLevel[2][0] = 1;
+                                                    this.turnCountAI++;
+                                            } else {
+                                                    for (int k = 0; k < 3; i++) {
+                                                            for (int l = 0; l < 3; j++) {
+                                                                    if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
+                                                                            if (this.turnCountAI == 2) {
+                                                                                    if (k != 1 && l != 0) {
+                                                                                            this.bottomLevel[1][0] = 1;
+                                                                                            this.gameOver = true;
+                                                                                            // game over
+                                                                                    } else {
+                                                                                            this.bottomLevel[0][2] = 1;
+                                                                                            this.turnCountAI++;
+                                                                                    }
+                                                                            } else if (!this.gameOver) {
+                                                                                    for (int m = 0; m < 3; i++) {
+                                                                                            for (int n = 0; n < 3; j++) {
+                                                                                                    if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
+                                                                                                            if (this.turnCountAI == 3) {
+                                                                                                                    if (m != 1 && n != 1) {
+                                                                                                                            this.bottomLevel[1][1] = 1;
+                                                                                                                            this.gameOver = true;
+                                                                                                                            // game over
+                                                                                                                    } else {
+                                                                                                                            this.bottomLevel[0][1] = 1;
+                                                                                                                            this.gameOver = true;
+                                                                                                                            // game over
+                                                                                                                    }
+                                                                                                            }
+                                                                                                    }
+                                                                                            }
+                                                                                    }
+                                                                            }
+                                                                    }
+                                                            }
+                                                    }
+                                            }
+                                    }
+                                    if (i == 2 && j == 2) {
+                                            if (this.turnCountAI == 1) {
+                                                    this.bottomLevel[0][2] = 1;
+                                                    this.turnCountAI++;
+                                            } else {
+                                                    for (int k = 0; k < 3; i++) {
+                                                            for (int l = 0; l < 3; j++) {
+                                                                    if (this.bottomLevel[k][l] == 2 && k != i && l != j) {
+                                                                            if (this.turnCountAI == 2) {
+                                                                                    if (k != 0 && l != 1) {
+                                                                                            this.bottomLevel[0][1] = 1;
+                                                                                            this.gameOver = true;
+                                                                                            // game over
+                                                                                    } else {
+                                                                                            this.bottomLevel[2][0] = 1;
+                                                                                            this.turnCountAI++;
+                                                                                    }
+                                                                            } else if (!this.gameOver) {
+                                                                                    for (int m = 0; m < 3; i++) {
+                                                                                            for (int n = 0; n < 3; j++) {
+                                                                                                    if (this.bottomLevel[m][n] == 2 && m != k && n != l) {
+                                                                                                            if (this.turnCountAI == 3) {
+                                                                                                                    if (m != 1 && n != 1) {
+                                                                                                                            this.bottomLevel[1][1] = 1;
+                                                                                                                            this.gameOver = true;
+                                                                                                                            // game over
+                                                                                                                    } else {
+                                                                                                                            this.bottomLevel[1][0] = 1;
+                                                                                                                            this.gameOver = true;
+                                                                                                                            // game over
+                                                                                                                    }
+                                                                                                            }
+                                                                                                    }
+                                                                                            }
+                                                                                    }
+                                                                            }
+                                                                    }
+                                                            }
+                                                    }
+                                            }
+                                    }
+                            }
+                    }
+                }
+            }
 	}
 
 	// use just p2 in main class if AI is selected
