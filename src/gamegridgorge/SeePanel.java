@@ -46,7 +46,8 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
         //put code needed to be run once upon startup here
         gameFontSize = 30;
         addButton(40, 40, "Minesweeper", '☼');
-        addButton(40, 90, "Portals", 'o');
+        addButton(40, 90, "Portals", 'o');;
+        addButton(40, 140, "tic", 'x');
         xTrans = 70;
         yTrans = 70;
         gameLoaded = false;
@@ -75,17 +76,19 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 {
                     //appendix code
                     game = new TicTacToe();
-                    initGame(80, 70, 70);
+                    initGame(60, 70, 70);
                     //any initialization, espescially that of the grid (will be drawn after gameLoaded becomes true)
                     gameLoaded = true;
                 }
+                break;
                 case 'o':
                 {
                     game = new Portals();
-                    initGame(20, 70, 70);
-                    
+                    initGame(30, 70, 70);
+                    ((Portals)game).newBoard(10, 10);
                     gameLoaded = true;
                 }
+                break;
             }
         }
         else
@@ -95,10 +98,12 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 //game specific run commands
                 case 'o':
                 {
+                    if(((Portals)game).turnTimer == 90 || ((Portals)game).turnTimer == 30)
+                        ((Portals)game).teleport();
                     if(((Portals)game).turnTimer == 60)
-                    {
                         ((Portals)game).enemyTurn();
-                    }
+                    if(((Portals)game).turnTimer > 0)
+                        ((Portals)game).turnTimer--;
                 }
                 break;
             }
