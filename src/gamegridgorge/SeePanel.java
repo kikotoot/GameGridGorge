@@ -176,10 +176,10 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 }
             }
 //            draws a cross where the mouse is calculated to be
-            int mX = (int)((mouseX - xTrans) / gameFontSize) * gameFontSize + xTrans;
-            int mY = (int)((mouseY - yTrans) / gameFontSize) * gameFontSize + yTrans;
-            g.drawLine(mX + 20, mY, mX - 20, mY);
-            g.drawLine(mX, mY + 20, mX, mY - 20);
+//            int mX = (int)((mouseX - xTrans) / gameFontSize) * gameFontSize + xTrans;
+//            int mY = (int)((mouseY - yTrans) / gameFontSize) * gameFontSize + yTrans;
+//            g.drawLine(mX + 20, mY, mX - 20, mY);
+//            g.drawLine(mX, mY + 20, mX, mY - 20);
         }
         else
         {
