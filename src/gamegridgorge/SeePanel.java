@@ -46,8 +46,9 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
         //put code needed to be run once upon startup here
         gameFontSize = 30;
         addButton(40, 40, "Minesweeper", '☼');
-        addButton(40, 90, "Portals", 'o');;
-        addButton(40, 140, "tic", 'x');
+        addButton(40, 90, "Portals (AI)", 'o');
+        addButton(40, 140, "TicTacToe (2 Player)", 'x');
+        addButton(40, 190, "TicTacToe (AI)", 'X');
         xTrans = 70;
         yTrans = 70;
         gameLoaded = false;
@@ -76,6 +77,15 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 {
                     //appendix code
                     game = new TicTacToe();
+                    initGame(60, 70, 70);
+                    //any initialization, espescially that of the grid (will be drawn after gameLoaded becomes true)
+                    gameLoaded = true;
+                }
+                break;
+                case 'X':
+                {
+                    //appendix code
+                    game = new TicTacToeAI();
                     initGame(60, 70, 70);
                     //any initialization, espescially that of the grid (will be drawn after gameLoaded becomes true)
                     gameLoaded = true;
@@ -163,13 +173,13 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
             }
             if(game.getDrawGrid())
             {
-                for(int xOn = 0; xOn < game.width; xOn++)
+                for(int xOn = 1; xOn < game.width; xOn++)
                 {
                     g.setColor(hue);
                     g.drawLine(xTrans + xOn * gameFontSize, yTrans, xTrans + xOn * gameFontSize, yTrans + game.height * gameFontSize);
 
                 }
-                for(int yOn = 0; yOn < game.height; yOn++)
+                for(int yOn = 1; yOn < game.height; yOn++)
                 {
                     g.setColor(hue);
                     g.drawLine(xTrans, yTrans + yOn * gameFontSize, xTrans + game.width * gameFontSize, yTrans + yOn * gameFontSize);

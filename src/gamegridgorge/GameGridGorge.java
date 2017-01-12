@@ -63,9 +63,8 @@ public class GameGridGorge
             panel1.frameWidth = windowWidth;
             panel1.frameHeight = windowHeight - panel1.frameHeightMin;
             panel1.run();
-            Thread.sleep(panel1.framerate / 2);
             panel1.repaint();
-            Thread.sleep(panel1.framerate / 2);
+            Thread.sleep(panel1.framerate);
             
         }
     }
