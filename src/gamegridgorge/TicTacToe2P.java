@@ -44,7 +44,7 @@ public class TicTacToe2P extends Game {
 
     // use just p2 in main class if AI is selected
     public void turnP1(int row, int column) {
-        while (this.invalidMove) {
+        if(this.invalidMove) {
             if (this.bottomLevel[row][column] == 0) {
                 this.bottomLevel[row][column] = 1;
                 this.invalidMove = false;
@@ -54,7 +54,7 @@ public class TicTacToe2P extends Game {
     }
 
     public void turnP2(int row, int column) {
-        while (this.invalidMove) {
+        if(this.invalidMove) {
             if (this.bottomLevel[row][column] == 0) {
                 this.bottomLevel[row][column] = 2;
                 this.invalidMove = false;
@@ -64,8 +64,11 @@ public class TicTacToe2P extends Game {
     }
 
    public void endCheck2P() {
+       boolean tie = true;
         for (int a = 0; a < 3; a++) {
             for (int b = 0; b < 3; b++) {
+                if(bottomLevel[a][b] == 0)
+                    tie = false;
                 if (b == 0 && inGame) {
                     if (this.bottomLevel[a][b] == this.bottomLevel[a][b + 1]
                             && this.bottomLevel[a][b + 1] == this.bottomLevel[a][b + 2]
@@ -103,6 +106,10 @@ public class TicTacToe2P extends Game {
                     }
                 }
             }
+        }
+        if(tie)
+        {
+            inGame = false;
         }
     }
 
