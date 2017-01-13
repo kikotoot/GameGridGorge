@@ -32,7 +32,7 @@ public class Portals extends Game
     Portals()
     {
         name = "Portals";
-        bottomTranslation = new char[] {' ', '#', 'o', '1', '2', '3', '4', '5', '6'};
+        bottomTranslation = new char[] {' ', '#', 'o', '1', '2', '3', '4', '5', '6', 'R', 'O', 'L', ':'};
         topTranslation = new char[] {' ', '|', '<', 'K'};
         drawGrid = true;
         drawBorder = true;
@@ -44,16 +44,21 @@ public class Portals extends Game
     public void newBoard(int w, int h)
     {
         width = w;
-        height = h;
-        bottomLevel = new int[w][h];
-        topLevel = new int[w][h];
+        height = h + 1;
+        bottomLevel = new int[w][h + 1];
+        topLevel = new int[w][h + 1];
         bottomLevel[w - 1][h - 1] = 1;
+        bottomLevel[0][h] = 9;
+        bottomLevel[1][h] = 10;
+        bottomLevel[2][h] = 11;
+        bottomLevel[3][h] = 11;
+        bottomLevel[4][h] = 12;
         int portalsMax = w * h / 10;
         for(int p = 0; p < portalsMax;)
             {
                 int tempX = RNG.nextInt(w);
                 int tempY = RNG.nextInt(h);
-                if(bottomLevel[tempX][tempY] != 2 && (tempX != 0 || tempY != 0) && (tempX != width - 1 || tempY != height - 1))
+                if(bottomLevel[tempX][tempY] != 2 && (tempX != 0 || tempY != 0) && (tempX != width - 1 || tempY != height - 1 - 1))
                 {
                     bottomLevel[tempX][tempY] = 2;
                     p++;
@@ -67,7 +72,7 @@ public class Portals extends Game
     {
         if(inGame)
         {
-            if(turnTimer == 0)
+            if(turnTimer == 0 && y == height - 1)
             {
                 turnTimer = 120;
                 playerTurn();
@@ -79,7 +84,7 @@ public class Portals extends Game
     public void playerTurn()
     {
         int roll = RNG.nextInt(6);
-        bottomLevel[0][0] = roll + 3;
+        bottomLevel[5][height - 1] = roll + 3;
         for(int i = roll; i >= 0; i--)
         {
             if(human.y % 2 == 1)
@@ -113,7 +118,7 @@ public class Portals extends Game
     public void enemyTurn()
     {
         int roll = RNG.nextInt(6);
-        bottomLevel[0][0] = roll + 3;
+        bottomLevel[5][height - 1] = roll + 3;
         for(int i = roll; i >= 0; i--)
         {
             if(comp.y % 2 == 1)
@@ -156,21 +161,23 @@ public class Portals extends Game
     }
     public void teleport()
     {
+        boolean done = false;
         if(turnTimer == 30 && bottomLevel[comp.x][comp.y] == 2)
         {
-            int pOn = width * height / 10;
+            int pOn = width * height - 1 / 10;
             for(int xOn = 0; xOn < width; xOn++)
             {
-                for(int yOn = 0; yOn < height; yOn++)
+                for(int yOn = 0; yOn < height - 1; yOn++)
                 {
                     if(bottomLevel[xOn][yOn] == 2)
                     {
                         pOn--;
-                        if(RNG.nextInt(pOn + 1) == 0)
+                        if(!done && RNG.nextInt(pOn + 1) == 0)
                         {
                             //teleport the comp
                             comp.x = xOn;
                             comp.y = yOn;
+                            done = true;
                         }
                     }
                 }
@@ -179,19 +186,20 @@ public class Portals extends Game
         }
         if(turnTimer == 90 && bottomLevel[human.x][human.y] == 2)
         {
-            int pOn = width * height / 10;
+            int pOn = width * height - 1 / 10;
             for(int xOn = 0; xOn < width; xOn++)
             {
-                for(int yOn = 0; yOn < height; yOn++)
+                for(int yOn = 0; yOn < height - 1; yOn++)
                 {
                     if(bottomLevel[xOn][yOn] == 2)
                     {
                         pOn--;
-                        if(RNG.nextInt(pOn + 1) == 0)
+                        if(!done && RNG.nextInt(pOn + 1) == 0)
                         {
                             //teleport player
                             human.x = xOn;
                             human.y = yOn;
+                            done = true;
                         }
                     }
                 }
