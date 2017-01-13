@@ -48,7 +48,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
         addButton(40, 40, "Minesweeper", '☼');
         addButton(40, 90, "Portals (AI)", 'o');
         addButton(40, 140, "TicTacToe (2 Player)", 'x');
-        addButton(40, 190, "TicTacToe (AI)", 'X');
+        //addButton(40, 190, "TicTacToe (AI)", 'X');
         xTrans = 70;
         yTrans = 70;
         gameLoaded = false;
