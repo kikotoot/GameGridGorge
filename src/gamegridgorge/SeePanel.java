@@ -76,7 +76,7 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                 case 'x':
                 {
                     //appendix code
-                    game = new TicTacToe();
+                    game = new TicTacToe2P();
                     initGame(60, 70, 70);
                     //any initialization, espescially that of the grid (will be drawn after gameLoaded becomes true)
                     gameLoaded = true;
@@ -116,9 +116,9 @@ public class SeePanel extends JPanel implements KeyListener, MouseMotionListener
                         ((Portals)game).turnTimer--;
                 }
                 break;
-                case 'x':
+                case 'X':
                 {
-                    //((TicTacToe)game).turnAI();
+                    ((TicTacToeAI)game).turnAI();
                 }
                 break;
             }

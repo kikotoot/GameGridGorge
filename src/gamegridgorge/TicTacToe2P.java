@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
  *
  * @author
  */
-public class TicTacToe extends Game {
+public class TicTacToe2P extends Game {
 
     private int moveCount = 0;
     private boolean tie = true;
@@ -27,7 +27,7 @@ public class TicTacToe extends Game {
         
      */
     // setup a tictactoe board
-    public TicTacToe() {
+    public TicTacToe2P() {
         width = 3;
         height = 3;
         name = "Tic Tac Toe";
